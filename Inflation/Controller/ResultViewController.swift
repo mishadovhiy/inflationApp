@@ -97,7 +97,7 @@ class ResultViewController: UIViewController {
         var cdi2: Double = data.cpi["\(year)"]!
         
         var sum = (cdi2 / cdi1) * Double(dollar)
-        var text = "\(n). Buying power in \(year) is $\(Int(sum))"
+        var text = "\(n). \(year) → $\(Int(sum))"
         var textArray: [String] = ["\(text)"]
         
         if Int(data.secondYear)! > Int(data.firstYear)! {
@@ -106,7 +106,7 @@ class ResultViewController: UIViewController {
                 n += 1
                 cdi2 = data.cpi["\(year)"]!
                 sum = (cdi2 / cdi1) * Double(dollar)
-                text = "\(n). Buying power in \(year) is $\(round(100 * Double(sum)) / 100)"
+                text = "\(n). \(year) → $\(round(100 * Double(sum)) / 100)"
                 textArray.append(text)
             }
         }
@@ -116,7 +116,7 @@ class ResultViewController: UIViewController {
                 n += 1
                 cdi2 = data.cpi["\(year)"]!
                 sum = (cdi2 / cdi1) * Double(dollar)
-                text = "\(n). Buying power in \(year) is $\(round(100 * Double(sum)) / 100)"
+                text = "\(n). \(year) → $\(round(100 * Double(sum)) / 100)"
                 textArray.append(text)
             }
         }
