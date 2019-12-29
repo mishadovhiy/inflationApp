@@ -36,6 +36,10 @@ class ResultViewController: UIViewController {
         
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     var pricesLowOrHigh = "higher"
     
     var percantDifference = (data.secondCpi - data.firstCpi) / data.firstCpi * 100

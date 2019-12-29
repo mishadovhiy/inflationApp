@@ -26,6 +26,10 @@ class MainViewController: UIViewController {
         
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     func updateUI() {
         
         firstYearPickerView.dataSource = self
