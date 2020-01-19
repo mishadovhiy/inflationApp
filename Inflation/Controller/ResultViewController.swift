@@ -27,18 +27,21 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var formAmountLabel: UILabel!
     @IBOutlet weak var formResultLabel: UILabel!
     @IBOutlet weak var historyTitleLabel: UILabel!
-    @IBOutlet weak var historyTextView: UITextView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    var pricesLowOrHigh = "higher"
+    var percantDifference = (data.secondCpi - data.firstCpi) / data.firstCpi * 100
+    var historyResults = [HistoryCell]()
+    var n = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadResults()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        loadResults()
+
     }
-    
-    var pricesLowOrHigh = "higher"
-    
-    var percantDifference = (data.secondCpi - data.firstCpi) / data.firstCpi * 100
     
     func loadResults() {
         
@@ -89,41 +92,33 @@ class ResultViewController: UIViewController {
     
     func inflationHistory() {
         
-        var n = 1
         let cdi1 = data.firstCpi
         let dollar = Int(data.amount)!
-
         var year = Int(data.firstYear)!
-        var cdi2: Double = data.cpi["\(year)"]!
-        
-        var sum = (cdi2 / cdi1) * Double(dollar)
-        var text = "\(n). \(year) → $\(Int(sum))"
-        var textArray: [String] = ["\(text)"]
+        historyTitleLabel.text = "Inflation history of $\(dollar) between \(data.firstYear) and \(data.secondYear)"
         
         if Int(data.secondYear)! > Int(data.firstYear)! {
             for _ in 0...calculationOfYears()-1 {
                 year += 1
-                n += 1
-                cdi2 = data.cpi["\(year)"]!
-                sum = (cdi2 / cdi1) * Double(dollar)
-                text = "\(n). \(year) → $\(round(100 * Double(sum)) / 100)"
-                textArray.append(text)
+                historyCalculation(year: year, cdi1: cdi1, dollar: dollar)
             }
         }
         if Int(data.secondYear)! < Int(data.firstYear)! {
             for _ in 0...calculationOfYears()-1 {
                 year -= 1
-                n += 1
-                cdi2 = data.cpi["\(year)"]!
-                sum = (cdi2 / cdi1) * Double(dollar)
-                text = "\(n). \(year) → $\(round(100 * Double(sum)) / 100)"
-                textArray.append(text)
+                historyCalculation(year: year, cdi1: cdi1, dollar: dollar)
             }
         }
+    }
+    
+    func historyCalculation(year: Int, cdi1: Double, dollar: Int) {
         
-        let result = textArray.joined(separator: "\n")
-        historyTextView.text = result
-        historyTitleLabel.text = "Inflation history of $\(dollar) between \(data.firstYear) and \(data.secondYear)"
+        let cdi2 = data.cpi["\(year)"]!
+        let sum = (cdi2 / cdi1) * Double(dollar)
+        let convertedSum = round(100 * Double(sum)) / 100
+        let new = HistoryCell(year: "\(year)", value: "$\(convertedSum)", count: n)
+        n += 1
+        historyResults.append(new)
         
     }
     
@@ -164,6 +159,29 @@ class ResultViewController: UIViewController {
     @IBAction func closeResults(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+}
+
+extension ResultViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return historyResults.count
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let row = historyResults[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
+        
+        cell.cellValue.text = row.value
+        cell.cellYear.text = row.year
+        cell.countLabel.text = "\(row.count)."
+        
+        return cell
         
     }
     

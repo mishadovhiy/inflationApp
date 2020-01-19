@@ -15,6 +15,8 @@
 		8D5CFBC8238DDCEA00A7857D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CFBC6238DDCEA00A7857D /* LaunchScreen.storyboard */; };
 		8D5CFBD2238DDEE200A7857D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5CFBD1238DDEE200A7857D /* Data.swift */; };
 		8D7DDF73238E28AC003AED71 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7DDF72238E28AC003AED71 /* ResultViewController.swift */; };
+		8DD8DC8723D4C10B006B7FAD /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD8DC8623D4C10B006B7FAD /* TableViewCell.swift */; };
+		8DD8DC8923D4CBC7006B7FAD /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD8DC8823D4CBC7006B7FAD /* HistoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		8D5CFBC9238DDCEA00A7857D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D5CFBD1238DDEE200A7857D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		8D7DDF72238E28AC003AED71 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		8DD8DC8623D4C10B006B7FAD /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		8DD8DC8823D4CBC7006B7FAD /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				8D5CFBD1238DDEE200A7857D /* Data.swift */,
+				8DD8DC8623D4C10B006B7FAD /* TableViewCell.swift */,
+				8DD8DC8823D4CBC7006B7FAD /* HistoryCell.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -169,8 +175,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D7DDF73238E28AC003AED71 /* ResultViewController.swift in Sources */,
+				8DD8DC8923D4CBC7006B7FAD /* HistoryCell.swift in Sources */,
 				8D5CFBC0238DDCE700A7857D /* MainViewController.swift in Sources */,
 				8D5CFBBC238DDCE700A7857D /* AppDelegate.swift in Sources */,
+				8DD8DC8723D4C10B006B7FAD /* TableViewCell.swift in Sources */,
 				8D5CFBBE238DDCE700A7857D /* SceneDelegate.swift in Sources */,
 				8D5CFBD2238DDEE200A7857D /* Data.swift in Sources */,
 			);
