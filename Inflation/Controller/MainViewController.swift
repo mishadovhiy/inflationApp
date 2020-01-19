@@ -26,8 +26,8 @@ class MainViewController: UIViewController {
         
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+          return .lightContent
     }
     
     func updateUI() {
@@ -45,8 +45,10 @@ class MainViewController: UIViewController {
     func defaultYears() {
         
         let maxNumber = data.cpi.keys.count - 1
-        let firstYear = data.pickerData()[0]
+        //let firstYear = data.pickerData()[0]
+        let firstYear = data.pickerData()[63]
         let lastYear = data.pickerData()[maxNumber]
+        firstYearPickerView.selectRow(63, inComponent: 0, animated: true)
         secondYearPickerView.selectRow(maxNumber, inComponent: 0, animated: true)
         data.firstYear = firstYear
         data.secondYear = lastYear
@@ -145,15 +147,11 @@ class MainViewController: UIViewController {
 extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        
         return 1
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         return data.pickerData().count
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -169,13 +167,10 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             data.secondCpi = data.cpi[data.secondYear]!
             calculateInflation()
         }
-
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
         return data.pickerData()[row]
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
@@ -183,7 +178,6 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         let titleData = data.pickerData()[row]
         let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
         return myTitle
-        
     }
     
 }
