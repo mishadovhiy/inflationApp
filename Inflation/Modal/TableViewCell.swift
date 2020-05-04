@@ -13,5 +13,6 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var cellValue: UILabel!
     @IBOutlet weak var cellYear: UILabel!
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     
 }

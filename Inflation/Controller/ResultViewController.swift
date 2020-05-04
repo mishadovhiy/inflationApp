@@ -32,6 +32,7 @@ class ResultViewController: UIViewController {
     var pricesLowOrHigh = "higher"
     var percantDifference = (data.secondCpi - data.firstCpi) / data.firstCpi * 100
     var historyResults = [HistoryCell]()
+    var valuesAccrossYears = [0.0]
     var n = 1
     
     override func viewDidLoad() {
@@ -116,7 +117,8 @@ class ResultViewController: UIViewController {
         let cdi2 = data.cpi["\(year)"]!
         let sum = (cdi2 / cdi1) * Double(dollar)
         let convertedSum = round(100 * Double(sum)) / 100
-        let new = HistoryCell(year: "\(year)", value: "$\(convertedSum)", count: n)
+        let new = HistoryCell(year: "\(year)", value: "\(convertedSum)", count: n)
+        valuesAccrossYears.append(convertedSum)
         n += 1
         historyResults.append(new)
         
@@ -156,6 +158,14 @@ class ResultViewController: UIViewController {
         
     }
     
+    func progressBarSetup(n: String) -> Float {
+        
+        let biggest = Float(valuesAccrossYears.max() ?? 0.0)
+        let nFloat = Float(n) ?? 0.0
+        let sum = ((100 * nFloat) / biggest) / 100
+        return sum
+    }
+    
     @IBAction func closeResults(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
@@ -177,9 +187,10 @@ extension ResultViewController: UITableViewDataSource, UITableViewDelegate {
         let row = historyResults[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! TableViewCell
         
-        cell.cellValue.text = row.value
+        cell.cellValue.text = "$\(row.value)"
         cell.cellYear.text = row.year
-        cell.countLabel.text = "\(row.count)."
+        //cell.countLabel.text = "\(row.count)."
+        cell.progressBar.progress = progressBarSetup(n: row.value)
         
         return cell
         

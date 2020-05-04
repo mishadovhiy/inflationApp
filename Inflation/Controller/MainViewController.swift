@@ -61,6 +61,7 @@ class MainViewController: UIViewController {
         
         if data.amount != "" && data.amount != "0" {
             let sum = (data.secondCpi / data.firstCpi) * Double(data.amount)!
+            
             data.result = round(100 * Double(sum)) / 100
             resultLabel.text = "$\(data.result)"
             resultsActivation(active: true)
