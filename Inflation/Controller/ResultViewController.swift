@@ -10,6 +10,7 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var percentDifferenceLabel: UILabel!
     @IBOutlet weak var cpi1Label: UILabel!
@@ -42,8 +43,17 @@ class ResultViewController: UIViewController {
 
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.6) {
+            self.closeButton.alpha = 0.6
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.closeButton.alpha = 1
+    }
+    
     func loadResults() {
-        
         DispatchQueue.main.async {
             self.subtitleLabel.text = "$\(data.amount) in \(data.firstYear) → $\(data.result) in \(data.secondYear)"
         }

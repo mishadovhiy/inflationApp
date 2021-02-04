@@ -86,16 +86,19 @@ class MainViewController: UIViewController {
             }
             if let dataAmountt = Double(data.amount) {
                 calculateInflation(amount: dataAmountt, firstCPI: data.firstCpi, secondCPI: data.secondCpi)
+            } else {
+                eraseAll()
             }
+
         }
-        if data.amount.count == 0 {
-            eraseAll()
-        }
+        
     }
     
     func eraseAll() {
         data.amount = ""
-        amountLabel.text = "$0"
+        DispatchQueue.main.async {
+            self.amountLabel.text = "$0"
+        }
         resultsActivation(active: false)
         
     }

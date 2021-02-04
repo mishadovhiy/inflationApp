@@ -370,8 +370,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4W-nl-5gI">
-                                <rect key="frame" x="0.0" y="10" width="375" height="22"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" image="down">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -380,7 +381,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E49-n2-QL3">
-                                <rect key="frame" x="0.0" y="42" width="375" height="605"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="617"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gbL-2y-M7k" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1400"/>
@@ -740,17 +741,18 @@
                         <viewLayoutGuide key="safeArea" id="65F-e3-Ns6"/>
                         <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="E49-n2-QL3" firstAttribute="top" secondItem="r4W-nl-5gI" secondAttribute="bottom" constant="10" id="1p8-IT-cZU"/>
+                            <constraint firstItem="E49-n2-QL3" firstAttribute="top" secondItem="r4W-nl-5gI" secondAttribute="bottom" id="1p8-IT-cZU"/>
                             <constraint firstItem="r4W-nl-5gI" firstAttribute="leading" secondItem="65F-e3-Ns6" secondAttribute="leading" id="2tx-9w-2Sp"/>
                             <constraint firstItem="r4W-nl-5gI" firstAttribute="trailing" secondItem="65F-e3-Ns6" secondAttribute="trailing" id="GNE-JK-jeG"/>
                             <constraint firstItem="E49-n2-QL3" firstAttribute="leading" secondItem="65F-e3-Ns6" secondAttribute="leading" id="GOK-UX-nfZ"/>
                             <constraint firstItem="65F-e3-Ns6" firstAttribute="bottom" secondItem="E49-n2-QL3" secondAttribute="bottom" id="QgS-A8-tiO"/>
-                            <constraint firstItem="r4W-nl-5gI" firstAttribute="top" secondItem="65F-e3-Ns6" secondAttribute="top" constant="10" id="a22-M6-mWN"/>
+                            <constraint firstItem="r4W-nl-5gI" firstAttribute="top" secondItem="65F-e3-Ns6" secondAttribute="top" id="a22-M6-mWN"/>
                             <constraint firstItem="65F-e3-Ns6" firstAttribute="trailing" secondItem="E49-n2-QL3" secondAttribute="trailing" id="hgp-M0-iOg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7ms-iA-aAr"/>
                     <connections>
+                        <outlet property="closeButton" destination="r4W-nl-5gI" id="eMi-VH-mO5"/>
                         <outlet property="cpi1AmountLabel" destination="N9M-dy-fjI" id="ywm-fn-9MK"/>
                         <outlet property="cpi1Label" destination="m3u-cu-mhs" id="a0e-mh-0S7"/>
                         <outlet property="cpi2AmountLabel" destination="z9k-ue-wVd" id="6Cm-h2-W5H"/>
@@ -776,7 +778,7 @@
     </scenes>
     <resources>
         <image name="cIcon" width="11" height="18"/>
-        <image name="down" width="19" height="11"/>
+        <image name="down" width="37" height="4"/>
         <image name="logo" width="462" height="591"/>
         <image name="minus" width="11" height="20"/>
         <image name="more" width="19" height="19"/>
