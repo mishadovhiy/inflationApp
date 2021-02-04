@@ -22,6 +22,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("MainViewController")
+        
         updateUI()
         
     }
@@ -43,47 +45,55 @@ class MainViewController: UIViewController {
     }
     
     func defaultYears() {
-        
+        print("data.cpi:", data.cpi.count)
         let maxNumber = data.cpi.keys.count - 1
-        //let firstYear = data.pickerData()[0]
-        let firstYear = data.pickerData()[63]
-        let lastYear = data.pickerData()[maxNumber]
-        firstYearPickerView.selectRow(63, inComponent: 0, animated: true)
-        secondYearPickerView.selectRow(maxNumber, inComponent: 0, animated: true)
-        data.firstYear = firstYear
-        data.secondYear = lastYear
-        data.firstCpi = data.cpi[firstYear]!
-        data.secondCpi = data.cpi[lastYear]!
-        
+        if maxNumber > 1 {
+            let lastYearSelected = UserDefaults.standard.value(forKey: "lastYear") as? Int
+            let firstYear = data.pickerData()[lastYearSelected ?? 0]
+            let lastYear = data.pickerData()[maxNumber]
+            firstYearPickerView.selectRow(lastYearSelected ?? 0/*64*/, inComponent: 0, animated: true)
+            secondYearPickerView.selectRow(maxNumber, inComponent: 0, animated: true)
+            data.firstYear = firstYear
+            data.secondYear = lastYear
+            data.firstCpi = data.cpi[firstYear]!
+            data.secondCpi = data.cpi[lastYear]!
+        }
+
     }
     
-    func calculateInflation() {
-        
-        if data.amount != "" && data.amount != "0" {
-            let sum = (data.secondCpi / data.firstCpi) * Double(data.amount)!
+    func calculateInflation(amount: Double, firstCPI: Double, secondCPI: Double) {
+      //  if data.amount != "" && data.amount != "0" {
+        let sum = (secondCPI / firstCPI) * amount
             
-            data.result = round(100 * Double(sum)) / 100
-            resultLabel.text = "$\(data.result)"
-            resultsActivation(active: true)
+        data.result = round(100 * Double(sum)) / 100
+        resultsActivation(active: true)
+        DispatchQueue.main.async {
+            self.resultLabel.text = "$\(data.result)"
         }
+            
+            
+      /*  } else {
+            print("calculateInflation: error")
+        }*/
         
     }
     
     func eraseLast() {
-        
         if data.amount.count > 0 {
             data.amount.removeLast()
-            amountLabel.text = "$\(data.amount)"
-            calculateInflation()
+            DispatchQueue.main.async {
+                self.amountLabel.text = "$\(data.amount)"
+            }
+            if let dataAmountt = Double(data.amount) {
+                calculateInflation(amount: dataAmountt, firstCPI: data.firstCpi, secondCPI: data.secondCpi)
+            }
         }
         if data.amount.count == 0 {
             eraseAll()
         }
-        
     }
     
     func eraseAll() {
-        
         data.amount = ""
         amountLabel.text = "$0"
         resultsActivation(active: false)
@@ -91,7 +101,6 @@ class MainViewController: UIViewController {
     }
     
     func resultsActivation(active: Bool) {
-        
         if active {
             showResultButton.isEnabled = true
             resultLabel.alpha = 1
@@ -101,11 +110,9 @@ class MainViewController: UIViewController {
             data.result = 0.00
             resultLabel.text = "$\(data.result)"
         }
-        
     }
     
     func keySounds(soundID: SystemSoundID) {
-
         if data.amount != "" && data.amount != "0" {
             AudioServicesPlaySystemSound (soundID)
         } else {
@@ -115,13 +122,14 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func numberPressed(_ sender: UIButton) {
-        
         if data.amount == "0" {
             data.amount = ""
         }
         if data.amount.count != 9 {
             data.amount = data.amount + sender.currentTitle!
-            calculateInflation()
+            if let dataAmountt = Double(data.amount) {
+                calculateInflation(amount: dataAmountt, firstCPI: data.firstCpi, secondCPI: data.secondCpi)
+            }
             keySounds(soundID: 1104)
         } else {
             UIImpactFeedbackGenerator().impactOccurred()
@@ -131,7 +139,6 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func eraseNumers(_ sender: UIButton) {
-        
         if sender.tag == 11 {
             keySounds(soundID: 1155)
             eraseLast()
@@ -158,15 +165,24 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView == firstYearPickerView {
+            UserDefaults.standard.setValue(row, forKey: "lastYear")
             data.firstYear = data.pickerData()[row]
             data.firstCpi = data.cpi[data.firstYear]!
-            calculateInflation()
+            if let dataAmountt = Double(data.amount) {
+                if let fYear = data.cpi[data.firstYear] {
+                    calculateInflation(amount: dataAmountt, firstCPI: fYear, secondCPI: data.secondCpi)
+                }
+            }
         }
         
         if pickerView == secondYearPickerView {
             data.secondYear = data.pickerData()[row]
             data.secondCpi = data.cpi[data.secondYear]!
-            calculateInflation()
+            if let dataAmountt = Double(data.amount) {
+                if let secondY = data.cpi[data.secondYear] {
+                    calculateInflation(amount: dataAmountt, firstCPI: data.firstCpi, secondCPI: secondY)
+                }
+            }
         }
     }
     

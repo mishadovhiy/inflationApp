@@ -16,8 +16,6 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var cpi1AmountLabel: UILabel!
     @IBOutlet weak var cpi2Label: UILabel!
     @IBOutlet weak var cpi2AmountLabel: UILabel!
-    @IBOutlet weak var year1Label: UILabel!
-    @IBOutlet weak var year2Label: UILabel!
     @IBOutlet weak var dollar1Label: UILabel!
     @IBOutlet weak var dollar2Label: UILabel!
     @IBOutlet weak var differenceLabel: UILabel!
@@ -46,7 +44,9 @@ class ResultViewController: UIViewController {
     
     func loadResults() {
         
-        subtitleLabel.text = "$\(data.amount) in \(data.firstYear) → $\(data.result) in \(data.secondYear)"
+        DispatchQueue.main.async {
+            self.subtitleLabel.text = "$\(data.amount) in \(data.firstYear) → $\(data.result) in \(data.secondYear)"
+        }
         calculationPriceChange()
         tableInfo()
         textInfo()
@@ -57,37 +57,41 @@ class ResultViewController: UIViewController {
     
     func tableInfo() {
         
-        percentDifferenceLabel.text = "\(percantDifference)%"
-        cpi1Label.text = "CPI in \(data.firstYear)"
-        cpi1AmountLabel.text = "\(data.firstCpi)"
-        cpi2AmountLabel.text = "\(data.secondCpi)"
-        cpi2Label.text = "CPI in \(data.secondYear)"
-        year1Label.text = data.firstYear
-        year2Label.text = data.secondYear
-        dollar1Label.text = "$\(data.amount)"
-        dollar2Label.text = "$\(data.result)"
-        differenceLabel.text = "$\(calculationPriceDifference())"
+        DispatchQueue.main.async {
+            self.percentDifferenceLabel.text = "\(self.percantDifference)%"
+            self.cpi1Label.text = "CPI in \(data.firstYear)"
+            self.cpi1AmountLabel.text = "\(data.firstCpi)"
+            self.cpi2AmountLabel.text = "\(data.secondCpi)"
+            self.cpi2Label.text = "CPI in \(data.secondYear)"
+            self.dollar1Label.text = "$\(data.amount)"
+            self.dollar2Label.text = "$\(data.result)"
+            self.differenceLabel.text = "$\(self.calculationPriceDifference())"
+        }
         
     }
     
     func textInfo() {
         
-        textLabel.text = """
-        To calculate inflation we use the consumer price index (CPI), which measures the average change in prices over time using a market basket of goods and services, to see how far your dollar goes today, compared with previous years.
-        
-        According to the Bureau of Labor Statistics consumer price index, prices in \(data.secondYear) are \(percantDifference)% \(pricesLowOrHigh) than average prices throughout \(data.firstYear).
-        
-        In other words, $\(data.amount) in \(data.firstYear) is equivalent in purchasing power to about $\(data.result) in \(data.secondYear), a difference of $\(calculationPriceDifference()) over \(calculationOfYears()) years. 
-        """
+        DispatchQueue.main.async {
+            self.textLabel.text = """
+            To calculate inflation we use the consumer price index (CPI), which measures the average change in prices over time using a market basket of goods and services, to see how far your dollar goes today, compared with previous years.
+            
+            According to the Bureau of Labor Statistics consumer price index, prices in \(data.secondYear) are \(self.percantDifference)% \(self.pricesLowOrHigh) than average prices throughout \(data.firstYear).
+            
+            In other words, $\(data.amount) in \(data.firstYear) is equivalent in purchasing power to about $\(data.result) in \(data.secondYear), a difference of $\(self.calculationPriceDifference()) over \(self.calculationOfYears()) years. 
+            """
+        }
         
     }
     
     func howToCalculate() {
         
-        formCPI1Label.text = "\(data.firstCpi) (\(data.firstYear) CPI)"
-        formCPI2Label.text = "\(data.secondCpi) (\(data.secondYear) CPI)"
-        formAmountLabel.text = "$\(data.amount)"
-        formResultLabel.text = "$\(data.result)"
+        DispatchQueue.main.async {
+            self.formCPI1Label.text = "\(data.firstCpi) (\(data.firstYear) CPI)"
+            self.formCPI2Label.text = "\(data.secondCpi) (\(data.secondYear) CPI)"
+            self.formAmountLabel.text = "$\(data.amount)"
+            self.formResultLabel.text = "$\(data.result)"
+        }
         
     }
     
@@ -96,7 +100,9 @@ class ResultViewController: UIViewController {
         let cdi1 = data.firstCpi
         let dollar = Int(data.amount)!
         var year = Int(data.firstYear)!
-        historyTitleLabel.text = "Inflation history of $\(dollar) between \(data.firstYear) and \(data.secondYear)"
+        DispatchQueue.main.async {
+            self.historyTitleLabel.text = "Inflation history of $\(dollar) between \(data.firstYear) and \(data.secondYear)"
+        }
         
         if Int(data.secondYear)! > Int(data.firstYear)! {
             for _ in 0...calculationOfYears()-1 {
