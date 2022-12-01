@@ -11,7 +11,7 @@ import AVFoundation
 
 var data = Data()
 
-class MainViewController: UIViewController {
+class MainViewController: SuperVC {
     
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!

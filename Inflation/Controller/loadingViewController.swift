@@ -8,7 +8,7 @@
 
 import UIKit
 
-class loadingViewController: UIViewController {
+class loadingViewController: SuperVC {
 
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var mainTitleLabel: UILabel!

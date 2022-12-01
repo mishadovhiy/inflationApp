@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ResultViewController: UIViewController {
+class ResultViewController: SuperVC {
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var subtitleLabel: UILabel!

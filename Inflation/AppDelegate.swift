@@ -11,22 +11,25 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    static var shared:AppDelegate?
     var window: UIWindow?
+    lazy var banner: adBannerView = {
+        return adBannerView.instanceFromNib() as! adBannerView
+    }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        AppDelegate.shared = self
+        banner.createBanner()
         return true
     }
 
-    let analyticsName = "appdelegate"
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        AnalyticModel.shared.analiticStorage.append(.init(key: #function.description, action: analyticsName))
+
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        AnalyticModel.shared.analiticStorage.append(.init(key: #function.description, action: analyticsName))
-        AnalyticModel.shared.checkData()
+
     }
 
 }

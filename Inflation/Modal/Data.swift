@@ -261,7 +261,7 @@ struct Data {
     func loadCPI(completion: @escaping ([String: Double], String) -> ()) {
         
         var loadedData: [String: Double] = [:]
-        let urlPath = "https://www.dovhiy.com/apps/InflationAppCPI.json"
+        let urlPath = "https://www.mishadovhiy.com/apps/InflationAppCPI.json"
         let url: URL = URL(string: urlPath)!
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil {
