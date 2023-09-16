@@ -258,46 +258,8 @@ struct Data {
         return cpi.keys.sorted()
     }
     
-    func loadCPI(completion: @escaping ([String: Double], String) -> ()) {
-        
-        var loadedData: [String: Double] = [:]
-        let urlPath = "https://www.mishadovhiy.com/apps/InflationAppCPI.json"
-        let url: URL = URL(string: urlPath)!
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if error != nil {
-                print("loadCPI error:", error.debugDescription)
-                completion([:], "Internet Error!")
-                return
-            } else {
-                var jsonResult = NSArray()
-                do{
-                    jsonResult = try JSONSerialization.jsonObject(with: data!, options:JSONSerialization.ReadingOptions.allowFragments) as! NSArray
-                } catch let error as NSError {
-                    print("loadCPI error 2:", error)
-                    completion([:], "Error loading data")
-                    return
-                }
-                print(data?.description ?? "no description", "datadatadatadata")
-                print(jsonResult, "jsonResultjsonResultjsonResultjsonResult")
-                var jsonElement = NSDictionary()
-                
-                for i in 0..<jsonResult.count {
-                    jsonElement = jsonResult[i] as! NSDictionary
-                    let test = jsonElement["cpi"] as? NSArray
-                    if let cpi = test?.firstObject as? [String:Double]//jsonElement["cpi"] as? [String: Double]
-                    {
-                      //  completion(cpi, "")
-                        //loadedData.append(contentsOf: [cpi])
-                        loadedData = cpi
-                    }
-                }
-
-                completion(loadedData, "")
-            }
-        }
-        DispatchQueue.main.async {
-            task.resume()
-        }
-    }
+    
+    
+    
     
 }

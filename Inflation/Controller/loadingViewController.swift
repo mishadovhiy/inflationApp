@@ -22,7 +22,7 @@ class loadingViewController: SuperVC {
         DispatchQueue.main.async {
             self.logoFrame = self.logoImage.frame
         }
-        data.loadCPI { (loadedData, error) in
+        AppDelegate.shared?.api.loadCPI { (loadedData, error) in
             if error != "" {
                 self.errorLoading(error: error)
                 
@@ -77,7 +77,7 @@ class loadingViewController: SuperVC {
     }
 
     @IBAction func reloadPressed(_ sender: UIButton) {
-        data.loadCPI { (loadedData, error) in
+        AppDelegate.shared?.api.loadCPI { (loadedData, error) in
             if error != "" {
                 self.errorLoading(error: error)
             } else {

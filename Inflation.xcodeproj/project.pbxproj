@@ -19,6 +19,9 @@
 		8D5CFBC8238DDCEA00A7857D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5CFBC6238DDCEA00A7857D /* LaunchScreen.storyboard */; };
 		8D5CFBD2238DDEE200A7857D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5CFBD1238DDEE200A7857D /* Data.swift */; };
 		8D6D0C0829396E960099537A /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 8D6D0C0729396E960099537A /* GoogleMobileAds */; };
+		8D7BF7472AB650EE005F0CB9 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BF7462AB650EE005F0CB9 /* ApiManager.swift */; };
+		8D7BF7492AB65798005F0CB9 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BF7482AB65798005F0CB9 /* DB.swift */; };
+		8D7BF74B2AB66134005F0CB9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BF74A2AB66134005F0CB9 /* Extensions.swift */; };
 		8D7DDF73238E28AC003AED71 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7DDF72238E28AC003AED71 /* ResultViewController.swift */; };
 		8DD8DC8723D4C10B006B7FAD /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD8DC8623D4C10B006B7FAD /* TableViewCell.swift */; };
 		8DD8DC8923D4CBC7006B7FAD /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD8DC8823D4CBC7006B7FAD /* HistoryCell.swift */; };
@@ -39,6 +42,9 @@
 		8D5CFBC7238DDCEA00A7857D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D5CFBC9238DDCEA00A7857D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D5CFBD1238DDEE200A7857D /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		8D7BF7462AB650EE005F0CB9 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		8D7BF7482AB65798005F0CB9 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
+		8D7BF74A2AB66134005F0CB9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8D7DDF72238E28AC003AED71 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		8DD8DC8623D4C10B006B7FAD /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		8DD8DC8823D4CBC7006B7FAD /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
@@ -94,6 +100,7 @@
 				8D5CFBC4238DDCEA00A7857D /* Assets.xcassets */,
 				8D5CFBC6238DDCEA00A7857D /* LaunchScreen.storyboard */,
 				8D5CFBC9238DDCEA00A7857D /* Info.plist */,
+				8D7BF74A2AB66134005F0CB9 /* Extensions.swift */,
 			);
 			path = Inflation;
 			sourceTree = "<group>";
@@ -124,6 +131,8 @@
 				8D5CFBD1238DDEE200A7857D /* Data.swift */,
 				8DD8DC8623D4C10B006B7FAD /* TableViewCell.swift */,
 				8DD8DC8823D4CBC7006B7FAD /* HistoryCell.swift */,
+				8D7BF7462AB650EE005F0CB9 /* ApiManager.swift */,
+				8D7BF7482AB65798005F0CB9 /* DB.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -218,7 +227,10 @@
 				8DD8DC8923D4CBC7006B7FAD /* HistoryCell.swift in Sources */,
 				8D5CFBC0238DDCE700A7857D /* MainViewController.swift in Sources */,
 				8D461D7129396991000EDF01 /* adBannerView.swift in Sources */,
+				8D7BF7492AB65798005F0CB9 /* DB.swift in Sources */,
 				8D461D7229396991000EDF01 /* ExtensionGADBannerViewDelegate.swift in Sources */,
+				8D7BF7472AB650EE005F0CB9 /* ApiManager.swift in Sources */,
+				8D7BF74B2AB66134005F0CB9 /* Extensions.swift in Sources */,
 				8B3B993525CB876000286C6A /* loadingViewController.swift in Sources */,
 				8D5CFBBC238DDCE700A7857D /* AppDelegate.swift in Sources */,
 				8DD8DC8723D4C10B006B7FAD /* TableViewCell.swift in Sources */,
@@ -368,7 +380,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Inflation/Inflation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				INFOPLIST_FILE = Inflation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -376,7 +388,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = Dovhiy.Misha.inflation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -393,7 +405,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Inflation/Inflation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				INFOPLIST_FILE = Inflation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -401,7 +413,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = Dovhiy.Misha.inflation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
