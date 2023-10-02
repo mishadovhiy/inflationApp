@@ -9,7 +9,8 @@
 import Foundation
 
 struct Api {
-    func loadAppUrl(completion:@escaping(String, String)->()) {
+    ///"https://www.dovhiy.com/apps/InflationAppCPI.json"
+    private func loadAppUrl(completion:@escaping(String, String)->()) {
         perfromRequest(url: "https://www.mishadovhiy.com/apps/AppsData.json", completion: { res, error in
             if res.count == 0 || error != "" {
                 completion("", error == "" ? "No internet" : error)
@@ -36,6 +37,7 @@ struct Api {
     }
     
     func perfromRequest(url:String, completion:@escaping(NSArray, String)->()) {
+        print(url, " ujtyhrgerfda")
         let url: URL = URL(string: url)!
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if error != nil {
@@ -84,18 +86,20 @@ struct Api {
     
     func loadCPI(completion: @escaping ([String: Double], String) -> ()) {
     
-        request(url: .cpi, completion: { res, error in
-            var loadedData: [String: Double] = [:]
+        DispatchQueue(label: "api", qos: .userInitiated).async {
+            self.request(url: .cpi, completion: { res, error in
+                var loadedData: [String: Double] = [:]
 
-            res.forEach({
-                guard let jsonElement = $0 as? NSDictionary,
-                      let test = jsonElement["cpi"] as? NSArray,
-                      let cpi = test.firstObject as? [String:Double]
-                else { return }
-                loadedData = cpi
+                res.forEach({
+                    guard let jsonElement = $0 as? NSDictionary,
+                          let test = jsonElement["cpi"] as? NSArray,
+                          let cpi = test.firstObject as? [String:Double]
+                    else { return }
+                    loadedData = cpi
+                })
+
+                completion(loadedData, "")
             })
-
-            completion(loadedData, "")
-        })
+        }
     }
 }

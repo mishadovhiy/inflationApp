@@ -15,13 +15,13 @@ struct DB {
             if let holder = DB._db {
                 return holder
             } else {
-                return .init(dict: UserDefaults.standard.value(forKey: "db") as? [String:Any] ?? [:])
+                return .init(dict: UserDefaults.standard.value(forKey: "dbvdddddd") as? [String:Any] ?? [:])
             }
             
         }
         set {
             DB._db = newValue
-            UserDefaults.standard.setValue(newValue.dict, forKey: "db")
+            UserDefaults.standard.setValue(newValue.dict, forKey: "dbvdddddd")
         }
     }
     
@@ -34,6 +34,7 @@ struct DataBase {
     }
     
     var appUrl:String? {
+        //"https://www.dovhiy.com/apps/InflationAppCPI.json" //old
         get {
             return dict["appUrlds"] as? String
         }

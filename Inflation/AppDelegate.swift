@@ -13,8 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static var shared:AppDelegate?
     var window: UIWindow?
-    lazy var banner: adBannerView = {
-        return adBannerView.instanceFromNib() as! adBannerView
+    lazy var banner: AdsBannerView = {
+        return AdsBannerView.instanceFromNib() as! AdsBannerView
     }()
     var api = Api()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

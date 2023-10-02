@@ -15,6 +15,7 @@ class loadingViewController: SuperVC {
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var reloadButton: UIButton!
     var logoFrame = CGRect.zero
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.alpha = 0
@@ -28,7 +29,7 @@ class loadingViewController: SuperVC {
                 
             } else {
                 if loadedData.count > 0 {
-                    data.cpi = loadedData
+                    Globals.cpi = loadedData
                     UserDefaults.standard.setValue(loadedData, forKey: "CPIData")
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "loaded", sender: self)
@@ -44,7 +45,7 @@ class loadingViewController: SuperVC {
     
     func errorLoading(error: String = "Error loading data") {
         if let cpi = UserDefaults.standard.value(forKey: "CPIData") as? [String:Double] {
-            data.cpi = cpi
+            Globals.cpi = cpi
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "loaded", sender: self)
             }
@@ -82,7 +83,7 @@ class loadingViewController: SuperVC {
                 self.errorLoading(error: error)
             } else {
                 if loadedData.count > 0 {
-                    data.cpi = loadedData
+                    Globals.cpi = loadedData
                     UserDefaults.standard.setValue(loadedData, forKey: "CPIData")
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "loaded", sender: self)

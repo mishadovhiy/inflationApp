@@ -9,23 +9,32 @@
 import UIKit
 import AVFoundation
 
-var data = Data()
 
 class MainViewController: SuperVC {
     
+    @IBOutlet weak var segmentHolderView: UIView!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var showResultButton: UIButton!
     @IBOutlet weak var firstYearPickerView: UIPickerView!
     @IBOutlet weak var secondYearPickerView: UIPickerView!
+    var segment:SegmentView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("MainViewController")
-        
         updateUI()
-        
+        segment = .init(titles: [.init(name: "inflation", hideGradient: true, shadowColow: .red, tintColor: .green, selectedTextColor: .black), .init(name: "regular", hideGradient: true, shadowColow: .brown, tintColor: .orange, selectedTextColor: .white, deselectedColor: .black)], size: segmentHolderView.frame.size, background: .blue, selected: segmentedChanged(_:))
+        segmentHolderView.addSubview(segment!)
+        segment?.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: segmentHolderView)
+    }
+    
+    func segmentedChanged(_ newValue:Int) {
+        print(newValue, " yrhtegrfsec")
+        UIView.animate(withDuration: 0.3, delay: 0, options: .allowUserInteraction, animations: {
+            self.firstYearPickerView.superview?.isHidden = newValue == 1
+            self.resultLabel.superview?.isHidden = newValue == 1
+            
+        })
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -33,7 +42,6 @@ class MainViewController: SuperVC {
     }
     
     func updateUI() {
-        
         firstYearPickerView.dataSource = self
         firstYearPickerView.delegate = self
         secondYearPickerView.dataSource = self
@@ -41,51 +49,55 @@ class MainViewController: SuperVC {
         showResultButton.isEnabled = false
         resultsActivation(active: false)
         defaultYears()
-        
+        let view = [firstYearPickerView, secondYearPickerView]
+        view.forEach({
+            $0?.layer.cornerRadius = 9
+            $0?.layer.borderColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1).cgColor
+            $0?.layer.borderWidth = 1
+        })
+        let tfViews = [resultLabel.superview, amountLabel.superview]
+        tfViews.forEach({
+            $0?.layer.cornerRadius = 9
+            $0?.layer.borderColor = UIColor(red: 216/255, green: 216/255, blue: 216/255, alpha: 1).cgColor
+            $0?.layer.borderWidth = 1
+        })
     }
     
     func defaultYears() {
-        print("data.cpi:", data.cpi.count)
-        let maxNumber = data.cpi.keys.count - 1
+        print("Globals.cpi:", Globals.cpi.count)
+        let maxNumber = Globals.cpi.keys.count - 1
         if maxNumber > 1 {
             let lastYearSelected = UserDefaults.standard.value(forKey: "lastYear") as? Int
-            let firstYear = data.pickerData()[lastYearSelected ?? 0]
-            let lastYear = data.pickerData()[maxNumber]
+            let firstYear = Globals.pickerData()[lastYearSelected ?? 0]
+            let lastYear = Globals.pickerData()[maxNumber]
             firstYearPickerView.selectRow(lastYearSelected ?? 0/*64*/, inComponent: 0, animated: true)
             secondYearPickerView.selectRow(maxNumber, inComponent: 0, animated: true)
-            data.firstYear = firstYear
-            data.secondYear = lastYear
-            data.firstCpi = data.cpi[firstYear]!
-            data.secondCpi = data.cpi[lastYear]!
+            Globals.firstYear = firstYear
+            Globals.secondYear = lastYear
+            Globals.firstCpi = Globals.cpi[firstYear]!
+            Globals.secondCpi = Globals.cpi[lastYear]!
         }
 
     }
     
     func calculateInflation(amount: Double, firstCPI: Double, secondCPI: Double) {
-      //  if data.amount != "" && data.amount != "0" {
         let sum = (secondCPI / firstCPI) * amount
             
-        data.result = round(100 * Double(sum)) / 100
+        Globals.result = round(100 * Double(sum)) / 100
         resultsActivation(active: true)
         DispatchQueue.main.async {
-            self.resultLabel.text = "$\(data.result)"
+            self.resultLabel.text = "$\(Globals.result)"
         }
-            
-            
-      /*  } else {
-            print("calculateInflation: error")
-        }*/
-        
     }
     
     func eraseLast() {
-        if data.amount.count > 0 {
-            data.amount.removeLast()
+        if Globals.amount.count > 0 {
+            Globals.amount.removeLast()
             DispatchQueue.main.async {
-                self.amountLabel.text = "$\(data.amount)"
+                self.amountLabel.text = "$\(Globals.amount)"
             }
-            if let dataAmountt = Double(data.amount) {
-                calculateInflation(amount: dataAmountt, firstCPI: data.firstCpi, secondCPI: data.secondCpi)
+            if let dataAmountt = Double(Globals.amount) {
+                calculateInflation(amount: dataAmountt, firstCPI: Globals.firstCpi, secondCPI: Globals.secondCpi)
             } else {
                 eraseAll()
             }
@@ -95,7 +107,7 @@ class MainViewController: SuperVC {
     }
     
     func eraseAll() {
-        data.amount = ""
+        Globals.amount = ""
         DispatchQueue.main.async {
             self.amountLabel.text = "$0"
         }
@@ -110,13 +122,13 @@ class MainViewController: SuperVC {
         } else {
             showResultButton.isEnabled = false
             resultLabel.alpha = 0.3
-            data.result = 0.00
-            resultLabel.text = "$\(data.result)"
+            Globals.result = 0.00
+            resultLabel.text = "$\(Globals.result)"
         }
     }
     
     func keySounds(soundID: SystemSoundID) {
-        if data.amount != "" && data.amount != "0" {
+        if Globals.amount != "" && Globals.amount != "0" {
             AudioServicesPlaySystemSound (soundID)
         } else {
             UIImpactFeedbackGenerator().impactOccurred()
@@ -125,19 +137,19 @@ class MainViewController: SuperVC {
     }
     
     @IBAction func numberPressed(_ sender: UIButton) {
-        if data.amount == "0" {
-            data.amount = ""
+        if Globals.amount == "0" {
+            Globals.amount = ""
         }
-        if data.amount.count != 9 {
-            data.amount = data.amount + sender.currentTitle!
-            if let dataAmountt = Double(data.amount) {
-                calculateInflation(amount: dataAmountt, firstCPI: data.firstCpi, secondCPI: data.secondCpi)
+        if Globals.amount.count != 9 {
+            Globals.amount = Globals.amount + sender.currentTitle!
+            if let dataAmountt = Double(Globals.amount) {
+                calculateInflation(amount: dataAmountt, firstCPI: Globals.firstCpi, secondCPI: Globals.secondCpi)
             }
             keySounds(soundID: 1104)
         } else {
             UIImpactFeedbackGenerator().impactOccurred()
         }
-        amountLabel.text = "$\(data.amount)"
+        amountLabel.text = "$\(Globals.amount)"
 
     }
     
@@ -162,40 +174,40 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return data.pickerData().count
+        return Globals.pickerData().count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if pickerView == firstYearPickerView {
             UserDefaults.standard.setValue(row, forKey: "lastYear")
-            data.firstYear = data.pickerData()[row]
-            data.firstCpi = data.cpi[data.firstYear]!
-            if let dataAmountt = Double(data.amount) {
-                if let fYear = data.cpi[data.firstYear] {
-                    calculateInflation(amount: dataAmountt, firstCPI: fYear, secondCPI: data.secondCpi)
+            Globals.firstYear = Globals.pickerData()[row]
+            Globals.firstCpi = Globals.cpi[Globals.firstYear]!
+            if let dataAmountt = Double(Globals.amount) {
+                if let fYear = Globals.cpi[Globals.firstYear] {
+                    calculateInflation(amount: dataAmountt, firstCPI: fYear, secondCPI: Globals.secondCpi)
                 }
             }
         }
         
         if pickerView == secondYearPickerView {
-            data.secondYear = data.pickerData()[row]
-            data.secondCpi = data.cpi[data.secondYear]!
-            if let dataAmountt = Double(data.amount) {
-                if let secondY = data.cpi[data.secondYear] {
-                    calculateInflation(amount: dataAmountt, firstCPI: data.firstCpi, secondCPI: secondY)
+            Globals.secondYear = Globals.pickerData()[row]
+            Globals.secondCpi = Globals.cpi[Globals.secondYear]!
+            if let dataAmountt = Double(Globals.amount) {
+                if let secondY = Globals.cpi[Globals.secondYear] {
+                    calculateInflation(amount: dataAmountt, firstCPI: Globals.firstCpi, secondCPI: secondY)
                 }
             }
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data.pickerData()[row]
+        return Globals.pickerData()[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         
-        let titleData = data.pickerData()[row]
+        let titleData = Globals.pickerData()[row]
         let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor:UIColor.white])
         return myTitle
     }
