@@ -71,9 +71,9 @@ struct Api {
     }
     
     func request(url:Request, completion:@escaping(NSArray, String)->()) {
-        if let url = DB.db.appUrl {
-            perfromRequest(url: url, completion: completion)
-        } else {
+      //  if let url = DB.db.appUrl {
+            perfromRequest(url: "https://www.mishadovhiy.com/apps/InflationAppCPI.json", completion: completion)
+        /*} else {
             loadAppUrl { urlStr, error in
                 if urlStr != "" && error == "" {
                     self.request(url: url, completion: completion)
@@ -81,10 +81,10 @@ struct Api {
                     
                 }
             }
-        }
+        }*/
     }
     
-    func loadCPI(completion: @escaping ([String: Double], String) -> ()) {
+    func loadCPI(completion: @escaping (_ loadedData:[CPIData], String) -> ()) {
     
         DispatchQueue(label: "api", qos: .userInitiated).async {
             self.request(url: .cpi, completion: { res, error in
@@ -98,8 +98,52 @@ struct Api {
                     loadedData = cpi
                 })
 
-                completion(loadedData, "")
+                completion(loadedData.compactMap({ loaded in
+                    .with({
+                        $0.cpi = loaded.value
+                        $0.year = loaded.key
+                    })
+                }), "")
             })
         }
+    }
+}
+
+
+struct CPIData:Identifiable {
+    func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+    var id: UUID = .init()
+    var dict:[String:Any]
+    init(dict: [String : Any]) {
+        self.dict = dict
+    }
+    init() {
+        self.dict = [:]
+    }
+    var year:String {
+        get {
+            return dict["year"] as? String ?? ""
+        }
+        set {
+            dict.updateValue(newValue, forKey: "year")
+        }
+    }
+    
+    var cpi:Double {
+        get {
+            return dict["cpi"] as? Double ?? 0
+        }
+        set {
+            dict.updateValue(newValue, forKey: "cpi")
+        }
+    }
+    public static func with(
+      _ populator: (inout Self) throws -> ()
+    ) rethrows -> Self {
+      var message = Self()
+      try populator(&message)
+      return message
     }
 }

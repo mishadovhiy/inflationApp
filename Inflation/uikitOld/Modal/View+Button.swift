@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class View: UIView {
+class ViewRegular: UIView {
     @IBInspectable open var linkBackground:Bool = false {
         didSet {
             if linkBackground {
@@ -144,7 +144,7 @@ class View: UIView {
 }
 
 
-class Button:UIButton {
+class ButtonRegular:UIButton {
     private var moveToWindow:Bool = false
     override func didMoveToWindow() {
         super.didMoveToWindow()

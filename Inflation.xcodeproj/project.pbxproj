@@ -26,11 +26,19 @@
 		8D7BF7492AB65798005F0CB9 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BF7482AB65798005F0CB9 /* DB.swift */; };
 		8D7BF74B2AB66134005F0CB9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7BF74A2AB66134005F0CB9 /* Extensions.swift */; };
 		8D7DDF73238E28AC003AED71 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7DDF72238E28AC003AED71 /* ResultViewController.swift */; };
+		8D91FDC82B01B90E0042A147 /* extensionsSwiftui.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91FDC72B01B90E0042A147 /* extensionsSwiftui.swift */; };
+		8DA2B8042AFEC36800847B43 /* Extension_ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2B8032AFEC36800847B43 /* Extension_ResultDetailView.swift */; };
+		8DA2B8062AFEC3CE00847B43 /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2B8052AFEC3CE00847B43 /* CalculatorViewModel.swift */; };
 		8DBB38EC2AC84E63009B56DD /* AdsBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DBB38EA2AC84E63009B56DD /* AdsBannerView.xib */; };
 		8DBB38ED2AC84E63009B56DD /* AdsBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB38EB2AC84E63009B56DD /* AdsBannerView.swift */; };
 		8DBB38F22AC8502E009B56DD /* UITableViewDataSource_ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB38F12AC8502E009B56DD /* UITableViewDataSource_ResultViewController.swift */; };
 		8DBB38F52AC86340009B56DD /* NumberButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB38F42AC86340009B56DD /* NumberButton.swift */; };
 		8DD8DC8723D4C10B006B7FAD /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD8DC8623D4C10B006B7FAD /* TableViewCell.swift */; };
+		8DF3BF462AFE072D0078FA8F /* InflationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF3BF452AFE072D0078FA8F /* InflationApp.swift */; };
+		8DF3BF492AFE0E190078FA8F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF3BF482AFE0E190078FA8F /* HomeView.swift */; };
+		8DF3BF4F2AFE0E590078FA8F /* RegularTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF3BF4D2AFE0E590078FA8F /* RegularTableData.swift */; };
+		8DF3BF502AFE0E590078FA8F /* DBModelObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF3BF4E2AFE0E590078FA8F /* DBModelObservable.swift */; };
+		8DF3BF532AFE0EC20078FA8F /* ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF3BF522AFE0EC20078FA8F /* ResultDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,17 +57,25 @@
 		8D5CFBC2238DDCE700A7857D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D5CFBC4238DDCEA00A7857D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D5CFBC7238DDCEA00A7857D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8D5CFBC9238DDCEA00A7857D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D5CFBC9238DDCEA00A7857D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = uikitOld/Info.plist; sourceTree = "<group>"; };
 		8D5CFBD1238DDEE200A7857D /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		8D7BF7462AB650EE005F0CB9 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		8D7BF7482AB65798005F0CB9 /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		8D7BF74A2AB66134005F0CB9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8D7DDF72238E28AC003AED71 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		8D91FDC72B01B90E0042A147 /* extensionsSwiftui.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionsSwiftui.swift; sourceTree = "<group>"; };
+		8DA2B8032AFEC36800847B43 /* Extension_ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_ResultDetailView.swift; sourceTree = "<group>"; };
+		8DA2B8052AFEC3CE00847B43 /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
 		8DBB38EA2AC84E63009B56DD /* AdsBannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdsBannerView.xib; sourceTree = "<group>"; };
 		8DBB38EB2AC84E63009B56DD /* AdsBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdsBannerView.swift; sourceTree = "<group>"; };
 		8DBB38F12AC8502E009B56DD /* UITableViewDataSource_ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewDataSource_ResultViewController.swift; sourceTree = "<group>"; };
 		8DBB38F42AC86340009B56DD /* NumberButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberButton.swift; sourceTree = "<group>"; };
 		8DD8DC8623D4C10B006B7FAD /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		8DF3BF452AFE072D0078FA8F /* InflationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InflationApp.swift; sourceTree = "<group>"; };
+		8DF3BF482AFE0E190078FA8F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8DF3BF4D2AFE0E590078FA8F /* RegularTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularTableData.swift; sourceTree = "<group>"; };
+		8DF3BF4E2AFE0E590078FA8F /* DBModelObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBModelObservable.swift; sourceTree = "<group>"; };
+		8DF3BF522AFE0EC20078FA8F /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,15 +130,16 @@
 		8D5CFBBA238DDCE700A7857D /* Inflation */ = {
 			isa = PBXGroup;
 			children = (
-				8B632D7B25CE5E0B00DD4092 /* Inflation.entitlements */,
-				8D5CFBBB238DDCE700A7857D /* AppDelegate.swift */,
-				8D5CFBD3238DDEEB00A7857D /* Modal */,
-				8D5CFBD0238DDD1C00A7857D /* View */,
-				8D5CFBCF238DDD0A00A7857D /* Controller */,
+				8DF3BF452AFE072D0078FA8F /* InflationApp.swift */,
+				8DF3BF4C2AFE0E590078FA8F /* Model */,
+				8DF3BF4B2AFE0E280078FA8F /* View */,
 				8D5CFBC4238DDCEA00A7857D /* Assets.xcassets */,
 				8D5CFBC6238DDCEA00A7857D /* LaunchScreen.storyboard */,
-				8D5CFBC9238DDCEA00A7857D /* Info.plist */,
+				8B632D7B25CE5E0B00DD4092 /* Inflation.entitlements */,
 				8D7BF74A2AB66134005F0CB9 /* Extensions.swift */,
+				8D91FDC72B01B90E0042A147 /* extensionsSwiftui.swift */,
+				8D5CFBC9238DDCEA00A7857D /* Info.plist */,
+				8DF3BF472AFE0B350078FA8F /* uikitOld */,
 			);
 			path = Inflation;
 			sourceTree = "<group>";
@@ -167,6 +184,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8DA2B8012AFEC23000847B43 /* ResultDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				8DF3BF522AFE0EC20078FA8F /* ResultDetailView.swift */,
+				8DA2B8032AFEC36800847B43 /* Extension_ResultDetailView.swift */,
+			);
+			path = ResultDetailView;
+			sourceTree = "<group>";
+		};
+		8DA2B8022AFEC26300847B43 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				8DF3BF482AFE0E190078FA8F /* HomeView.swift */,
+				8DA2B8052AFEC3CE00847B43 /* CalculatorViewModel.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
 		8DBB38E92AC84E63009B56DD /* AdsBannerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +227,43 @@
 				8DD8DC8623D4C10B006B7FAD /* TableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		8DF3BF472AFE0B350078FA8F /* uikitOld */ = {
+			isa = PBXGroup;
+			children = (
+				8D5CFBBB238DDCE700A7857D /* AppDelegate.swift */,
+				8D5CFBD3238DDEEB00A7857D /* Modal */,
+				8D5CFBD0238DDD1C00A7857D /* View */,
+				8D5CFBCF238DDD0A00A7857D /* Controller */,
+			);
+			path = uikitOld;
+			sourceTree = "<group>";
+		};
+		8DF3BF4B2AFE0E280078FA8F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8DA2B8022AFEC26300847B43 /* HomeView */,
+				8DA2B8012AFEC23000847B43 /* ResultDetailView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8DF3BF4C2AFE0E590078FA8F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DF3BF4E2AFE0E590078FA8F /* DBModelObservable.swift */,
+				8DF3BF512AFE0E610078FA8F /* DataStruct */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8DF3BF512AFE0E610078FA8F /* DataStruct */ = {
+			isa = PBXGroup;
+			children = (
+				8DF3BF4D2AFE0E590078FA8F /* RegularTableData.swift */,
+			);
+			path = DataStruct;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,19 +349,27 @@
 				8DBB38ED2AC84E63009B56DD /* AdsBannerView.swift in Sources */,
 				8D5CFBC0238DDCE700A7857D /* MainViewController.swift in Sources */,
 				8D3EAB482AC09C4300B5D5B8 /* Extensions_SegmentItem.swift in Sources */,
+				8DA2B8062AFEC3CE00847B43 /* CalculatorViewModel.swift in Sources */,
 				8D3EAB4A2AC09D6F00B5D5B8 /* View+Button.swift in Sources */,
+				8DA2B8042AFEC36800847B43 /* Extension_ResultDetailView.swift in Sources */,
 				8D7BF7492AB65798005F0CB9 /* DB.swift in Sources */,
 				8D7BF7472AB650EE005F0CB9 /* ApiManager.swift in Sources */,
 				8DBB38F22AC8502E009B56DD /* UITableViewDataSource_ResultViewController.swift in Sources */,
+				8DF3BF4F2AFE0E590078FA8F /* RegularTableData.swift in Sources */,
 				8D7BF74B2AB66134005F0CB9 /* Extensions.swift in Sources */,
 				8D3EAB472AC09C4300B5D5B8 /* SegmentItem.swift in Sources */,
 				8DBB38F52AC86340009B56DD /* NumberButton.swift in Sources */,
+				8DF3BF502AFE0E590078FA8F /* DBModelObservable.swift in Sources */,
 				8B3B993525CB876000286C6A /* loadingViewController.swift in Sources */,
 				8D5CFBBC238DDCE700A7857D /* AppDelegate.swift in Sources */,
 				8D3EAB452AC09C4300B5D5B8 /* SegmentView.swift in Sources */,
+				8DF3BF492AFE0E190078FA8F /* HomeView.swift in Sources */,
 				8DD8DC8723D4C10B006B7FAD /* TableViewCell.swift in Sources */,
 				8D5CFBD2238DDEE200A7857D /* Globals.swift in Sources */,
+				8D91FDC82B01B90E0042A147 /* extensionsSwiftui.swift in Sources */,
 				8D3EAB442AC09C4300B5D5B8 /* create_SegmentedView.swift in Sources */,
+				8DF3BF462AFE072D0078FA8F /* InflationApp.swift in Sources */,
+				8DF3BF532AFE0EC20078FA8F /* ResultDetailView.swift in Sources */,
 				8D3EAB462AC09C4300B5D5B8 /* Extensions_SegmentedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,7 +520,7 @@
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				INFOPLIST_FILE = Inflation/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -466,7 +546,7 @@
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				INFOPLIST_FILE = Inflation/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NumberButton: Button {
+class NumberButton: ButtonRegular {
 
     override func firstMoved() {
         super.firstMoved()

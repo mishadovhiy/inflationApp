@@ -305,6 +305,36 @@
                   endingLineNumber = "102"
                   offsetFromSymbolStart = "48">
                </Location>
+               <Location
+                  uuid = "09D348B6-81BC-4EA2-8BCC-DC776356CEF3 - 86b2e8f47c02e9d1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Inflation.ViewRegular.touch(Swift.Bool) -&gt; ()"
+                  moduleName = "Inflation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/dev%20other%20apps/zzz%20local%20archive/Inflation/Inflation/Modal/View+Button.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "340">
+               </Location>
+               <Location
+                  uuid = "09D348B6-81BC-4EA2-8BCC-DC776356CEF3 - 5a20a23de8a313ce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Inflation.ViewRegular.touch(Swift.Bool) -&gt; ()"
+                  moduleName = "Inflation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/dev%20other%20apps/zzz%20local%20archive/Inflation/Inflation/Modal/View+Button.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "48">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -322,6 +352,150 @@
             endingLineNumber = "93"
             landmarkName = "touch(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4C5155D8-ED0A-4DDA-9B17-A3A3B9B32869"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Inflation/View/HomeView/HomeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "segmentedView"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "677C0757-1B89-4388-84A8-28912B739D83"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Inflation/View/HomeView/HomeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DD3666F9-7DFB-427E-96B7-351EB1A1C60E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Inflation/View/HomeView/HomeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CCB63501-F104-4750-B5C3-5D84865CC2E5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Inflation/Model/DBModelObservable.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "dataBase"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "CCB63501-F104-4750-B5C3-5D84865CC2E5 - b1cc3c9b0e40c1ac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Inflation.DBModelObservable.dataBase.didset : Inflation.LocalDataBase"
+                  moduleName = "Inflation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/dev%20other%20apps/zzz%20local%20archive/Inflation/Inflation/Model/DBModelObservable.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "336">
+               </Location>
+               <Location
+                  uuid = "CCB63501-F104-4750-B5C3-5D84865CC2E5 - b1cc3c9b0e40c1ac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Inflation.DBModelObservable.dataBase.didset : Inflation.LocalDataBase"
+                  moduleName = "Inflation"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mishadovhiy/Developer/dev%20other%20apps/zzz%20local%20archive/Inflation/Inflation/Model/DBModelObservable.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "320">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3AE5291-12D4-4D7B-8A63-92557312A5E6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Inflation/Model/DBModelObservable.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "dataBase"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8C46762D-6FE6-43BB-A21F-1ECCE01BD04A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Inflation/View/HomeView/HomeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "067DD57D-7094-488C-8D5D-6A7D412148F9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Inflation/View/HomeView/HomeView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "segmentedView"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

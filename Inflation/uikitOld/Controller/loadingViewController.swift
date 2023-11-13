@@ -29,7 +29,7 @@ class loadingViewController: SuperVC {
                 
             } else {
                 if loadedData.count > 0 {
-                    Globals.cpi = loadedData
+                //    Globals.cpi = loadedData
                     UserDefaults.standard.setValue(loadedData, forKey: "CPIData")
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "loaded", sender: self)
@@ -83,7 +83,7 @@ class loadingViewController: SuperVC {
                 self.errorLoading(error: error)
             } else {
                 if loadedData.count > 0 {
-                    Globals.cpi = loadedData
+                //    Globals.cpi = loadedData
                     UserDefaults.standard.setValue(loadedData, forKey: "CPIData")
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "loaded", sender: self)
