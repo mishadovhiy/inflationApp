@@ -14,13 +14,17 @@ struct ResultDetailView: View {
     
     var body: some View {
         GeometryReader { geo in
+            Color.black
+                .ignoresSafeArea(.all)
             ScrollView {
                 VStack(alignment:.leading) {
                     Spacer()
                         .frame(height: 10)
                     Text("Result")
                         .primaryStyle
-                        .frame(width: geo.size.width - 20, alignment: .center)
+                        .frame(width: geo.size.width,
+                               alignment: .center)
+                        .padding(.trailing, 10)
                     
                     ForEach(model.resultTableData) {
                         resultTableCell($0, screen: geo.size.width)
@@ -41,7 +45,8 @@ struct ResultDetailView: View {
                         historyCell($0)
                     }
                 }
-                .frame(width:geo.size.width - 20, alignment: .leading)
+                .frame(width:geo.size.width, 
+                       alignment: .leading)
                 .padding(.leading, 10)
                 .padding(.trailing, 10)
             }
@@ -49,7 +54,6 @@ struct ResultDetailView: View {
         }
         .onAppear(perform: {
             model.load(result)
-            print(result.enteredAmount, " yhrtgdfds")
         })
     }
     
@@ -76,6 +80,7 @@ struct ResultDetailView: View {
             }
             ProgressView(value: model.progressBarSetup(n: data.value))
         }
+        .padding(.trailing, 10)
     }
     
 }

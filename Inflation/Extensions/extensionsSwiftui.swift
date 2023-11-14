@@ -23,7 +23,7 @@ struct CalculatorButton: ViewModifier {
     var isDefault:Bool = true
     func body(content: Content) -> some View {
         content
-            .foregroundStyle(.background).background()
+            //.foregroundStyle(.background).background()
     }
 }
 

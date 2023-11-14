@@ -100,7 +100,6 @@ extension ResultDetailView {
             } else {
                 sum = Int(cpiResult.from)! - Int(cpiResult.to)!
             }
-            print(sum, " bbdfvd")
             return sum
         }
         

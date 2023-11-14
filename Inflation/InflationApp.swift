@@ -11,6 +11,8 @@ import SwiftUI
 @available(iOS 14.0, *)
 @main
 struct InflationApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var body: some Scene {
         WindowGroup {
             HomeView()

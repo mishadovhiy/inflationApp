@@ -7,13 +7,16 @@
 //
 
 import SwiftUI
-
+import Combine
 struct HomeView:View {
     @State var model:CalculatorViewModel = .init()
     @State var db:DBModelObservable = .init()
+    let sound:SoundModel = .init()
     
     var body: some View {
         GeometryReader { geometry in
+            Color.black
+                .ignoresSafeArea(.all)
             VStack(alignment:.center) {
                 segmentedView
                 VStack {
@@ -26,17 +29,16 @@ struct HomeView:View {
                             Text("result \(model.result.string)")
                                 .primaryStyle
                         }
-                        /*TextField("tf value", text: $model.textFiledValue)
-                            .primaryStyle
-                            .onChange(of: model.textFiledValue) {
-                                tfChanged(oldValue: $0, newValue: $1)
-                            }*/
                         Text(model.textFiledValue)
                             .primaryStyle
                     }
                     Spacer()
                     calculatorPadView(screen: geometry.size.width)
                         .frame(width: geometry.size.width)
+                    HStack(alignment:.center) {
+                        GADBannerViewController()
+                    }
+                    .frame(width: GADBannerViewController.size.width, height: GADBannerViewController.size.height)
                     
                 }
             }
@@ -45,6 +47,7 @@ struct HomeView:View {
             .background(Color.primaryBackground)
             
         }
+        .background(Color.primaryBackground)
         .onAppear(perform: {
             DispatchQueue(label: "db", qos: .userInitiated).async {
                 self.db.loadDB {
@@ -76,7 +79,7 @@ struct HomeView:View {
             Text("segmented view \(db.dataBase.selectedSegment.rawValue)")
                 .primaryStyle
         }
-        .tint(.black)
+       // .tint(.black)
 
     }
     
@@ -102,13 +105,14 @@ struct HomeView:View {
             .pickerStyle(.wheel)
         }
         .frame(height: 240)
-        .onChange(of: db.dataBase.selectedYearTwo) { oldValue, newValue in
+        
+        .onReceive(Just(db.dataBase.selectedYearTwo), perform: { _ in
             model.calculateInflation(firstCPI: cpi(.from), secondCPI: cpi(.to))
-        }
-        .onChange(of: db.dataBase.selectedYearFrom) { oldValue, newValue in
+        })
+        
+        .onReceive(Just(db.dataBase.selectedYearFrom), perform: { _ in
             model.calculateInflation(firstCPI: cpi(.from), secondCPI: cpi(.to))
-
-        }
+        })
     }
     
     func calculatorPadView(screen width:CGFloat) -> some View {
@@ -133,7 +137,7 @@ struct HomeView:View {
              }
              HStack(alignment: .top, content: {
                  numberPadView(screen: width)
-                 VStack(spacing:db.dataBase.selectedSegment == .calculator ? 15 : 0, content: {
+                 VStack(spacing:10, content: {
                      calcButton("<", pressed: {
                          removePressed(lastOnly: true)
                      }, screen: width)
@@ -143,12 +147,15 @@ struct HomeView:View {
                      
                      switch db.dataBase.selectedSegment {
                     case .inflation:
-                         calcButton("</", pressed: {
-                             model.showingDetail.toggle()
-                         }, screen: width)
-                         .sheet(isPresented: $model.showingDetail, content: {
-                             ResultDetailView(result: .init(calculatedResult: model.result, from: db.dataBase.selectedYearFrom, to: db.dataBase.selectedYearTwo, cpis: db.dataBase.cpi, enteredAmount: model.textFiledValue))
-                         })
+                         if model.resultEnubled {
+                             calcButton("</", pressed: {
+                                 model.showingDetail.toggle()
+                             }, screen: width)
+                             .sheet(isPresented: $model.showingDetail, content: {
+                                 ResultDetailView(result: .init(calculatedResult: model.result, from: db.dataBase.selectedYearFrom, to: db.dataBase.selectedYearTwo, cpis: db.dataBase.cpi, enteredAmount: model.textFiledValue))
+                             })
+                         }
+                         
                     case .calculator:
                       //  Spacer()
                         //    .frame(height: 55)
@@ -205,7 +212,6 @@ struct HomeView:View {
                 .primaryStyle
                 .frame(width: width / 4, height: 60)
         }
-        .tint(.white)
         .frame(width: width / 4, height: 60)
     }
     
@@ -228,6 +234,7 @@ struct HomeView:View {
             model.calculateInflation(firstCPI: cpi(.from), secondCPI: cpi(.to))
             self.model.inflationTextHolder = self.model.textFiledValue
         }
+        sound.play(.key)
     }
 
     
@@ -252,6 +259,7 @@ struct HomeView:View {
             model.higlightActionButtonAt = action
             model.textFiledValue = model.result.string
         }
+        sound.play(.erase)
     }
 
     func removePressed(lastOnly:Bool = false) {
@@ -267,6 +275,7 @@ struct HomeView:View {
         } else {
             model.textFiledValue = ""
         }
+        sound.play(last ? .erase : .eraseAll)
     }
 }
 
