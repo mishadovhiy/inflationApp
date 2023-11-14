@@ -15,8 +15,10 @@ extension HomeView {
         var showingDetail:Bool = false
         var result:Double = 0
 
+        var calculationResultShowing:Bool = false
         var inflationResult:Double = 0
         var inflationTextHolder:String = ""
+        var calculatorFirstValue:Double = 0
         var resultEnubled:Bool {
             result != 0
         }
@@ -25,22 +27,26 @@ extension HomeView {
             let sum = (secondCPI / firstCPI) * amount
             result = round(100 * Double(sum)) / 100
             inflationResult = result
-            print(result, " resultt")
-            print(firstCPI, " firstCPI")
-            print(secondCPI, " secondCPI")
-
-
         }
         
         
+        mutating func calculateResult(action:ActionButton) {
+            switch action {
+            case .divide:
+                result = calculatorFirstValue / (Double(textFiledValue) ?? 0)
+            case .minus:
+                result = calculatorFirstValue - (Double(textFiledValue) ?? 0)
+            case .multiply:
+                result = calculatorFirstValue * (Double(textFiledValue) ?? 0)
+            case .plus:
+                result = calculatorFirstValue + (Double(textFiledValue) ?? 0)
+            default: return
+            }
+            calculationResultShowing = true
+        }
         
         
         func cpi(_ key:String, db:[CPIData]) -> Double {
-//            if db.count - 1 >= key {
-//                return db[key].cpi
-//            } else {
-//                return 0
-//            }
             return db.first(where: {$0.year == key})?.cpi ?? 0
         }
     }

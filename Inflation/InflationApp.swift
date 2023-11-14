@@ -19,3 +19,4 @@ struct InflationApp: App {
     }
 }
 
+//add banner view to the uiwindow

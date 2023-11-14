@@ -49,6 +49,7 @@ struct ResultDetailView: View {
         }
         .onAppear(perform: {
             model.load(result)
+            print(result.enteredAmount, " yhrtgdfds")
         })
     }
     
@@ -73,13 +74,13 @@ struct ResultDetailView: View {
                 Text(data.value)
                     .primaryStyle
             }
-            ProgressView(value: data.progress)
+            ProgressView(value: model.progressBarSetup(n: data.value))
         }
     }
     
 }
 
 #Preview {
-    ResultDetailView(result: .init(calculatedResult: 123, from: "1850", to: "2023"))
+    ResultDetailView(result: .init(calculatedResult: 20, from: "1900", to: "2000", cpis: [], enteredAmount: "3"))
 }
 

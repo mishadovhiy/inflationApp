@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         AppDelegate.shared = self
         banner.createBanner()
-        validateUrl()
         return true
     }
 
@@ -33,20 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
 
-    
-    private func validateUrl() {
-        DispatchQueue(label: "db", qos: .userInitiated).async {
-            if DB.db.urlSettedDate != 0,
-               let d = Calendar.current.date(from: DB.db.urlSettedDate.dateComponents)?.differenceFromNow
-            {
-                print(d, " dateSetted from now")
-                if (d.day ?? 0) >= 7 || (d.month ?? 0) >= 1 || (d.year ?? 0) >= 1 {
-                    print("urlExpired")
-                    DB.db.appUrl = nil
-                }
-                
-            }
-        }
-    }
+
 }
 

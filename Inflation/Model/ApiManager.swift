@@ -30,7 +30,7 @@ struct Api {
             })
             print(loadedData, " hyrgtefr")
             DispatchQueue(label: "db", qos: .userInitiated).async {
-                DB.db.appUrl = loadedData
+            //    DB.db.appUrl = loadedData
                 completion(loadedData, error)
             }
         })
