@@ -54,6 +54,7 @@ struct ResultDetailView: View {
         }
         .onAppear(perform: {
             model.load(result)
+            print(result.enteredAmount, " yrefdws")
         })
     }
     

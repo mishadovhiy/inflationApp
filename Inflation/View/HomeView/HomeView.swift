@@ -69,7 +69,13 @@ struct HomeView:View {
 
     
     var segmentedView:some View {
-        Button {
+        SegmentView(values: ["Inflation", "Calculator"], didSelect: {
+            db.dataBase.selectedSegment = .init(rawValue: $0) ?? .inflation
+        }, selectedAt: db.dataBase.selectedSegment.rawValue)
+        .frame(height: 40)
+        .padding(.leading, 20)
+        .padding(.trailing, 20)
+       /* Button {
             withAnimation(.easeInOut) {
                 self.db.dataBase.selectedSegment = self.db.dataBase.selectedSegment == .inflation ? .calculator : .inflation
                 self.model.result = self.db.dataBase.selectedSegment == .inflation ? self.model.inflationResult : 0
@@ -78,7 +84,7 @@ struct HomeView:View {
         } label: {
             Text("segmented view \(db.dataBase.selectedSegment.rawValue)")
                 .primaryStyle
-        }
+        }*/
        // .tint(.black)
 
     }

@@ -32,7 +32,7 @@ extension ResultDetailView {
                 .init(title: "Cumulative price change", description: priceChangePrecent.string),
                 .init(title: "CPI in \(result.from)", description: cpi1.string),
                 .init(title: "CPI in \(result.to)", description: cpi2.string),
-                .init(title: "Amount", description: result.enteredAmount),
+                .init(title: "Amount", description: result.enteredAmount + "."),
                 .init(title: "Converted amount", description: result.calculatedResult.string),
                 .init(title: "Price difference", description: priceChange(result).string)
             ]
