@@ -22,6 +22,7 @@ extension HomeView {
         var resultEnubled:Bool {
             result != 0
         }
+        var appeared:Bool = false
         
         static func calculateInflation(firstCPI: Double, secondCPI: Double, enteredValue:String) -> Double {
             let amount = Double(enteredValue) ?? 0

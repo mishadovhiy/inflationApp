@@ -39,10 +39,10 @@ struct HomeView:View {
         .onAppear(perform: {
             DispatchQueue(label: "db", qos: .userInitiated).async {
                 self.db.loadDB {
+                    print(db.dataBase.selectedSegment.rawValue, " grgswfr")
+                    self.model.appeared = true
                     Api().loadCPI { cpi, error in
-                        print("rwsw ", cpi.first?.year)
-                        print("sdf ", cpi.last?.year)
-
+                        
                         if error == "" {
                             self.db.dataBase.cpi = cpi
                         }
@@ -58,7 +58,9 @@ struct HomeView:View {
     
     private func topView(_ screenWidth:CGSize, smallDevice:Bool) -> some View {
         VStack {
-            segmentedView
+            if model.appeared {
+                segmentedView
+            }
             if db.dataBase.selectedSegment == .inflation {
                 pickersView(smallDevice: smallDevice, screenWidth: screenWidth.width)
             }
@@ -103,7 +105,7 @@ struct HomeView:View {
     var segmentedView:some View {
         SegmentView(values: ["Inflation", "Calculator"], didSelect: {
             self.segmentedChanged($0)
-        }, selectedAt: db.dataBase.selectedSegment.rawValue)
+        }, selectedHolder: db.dataBase.selectedSegment.rawValue)
         .frame(height: 40)
         .padding(.leading, 20)
         .padding(.trailing, 20)

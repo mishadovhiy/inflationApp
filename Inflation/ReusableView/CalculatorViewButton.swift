@@ -26,12 +26,11 @@ struct CalculatorViewButton:View {
                     .style(.init(style: style))
                     .frame(width: geometry.size.width, height: geometry.size.height)
             })
-            .background(Color("gray2").opacity(touchesBegun ? 0.2 : 0))
-            .clipShape(RoundedRectangle(cornerRadius: 6))
             
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color("gray2"), lineWidth: isSelectedAction ? 1 : 0)
-              .frame(width: geometry.size.width, height: geometry.size.height)
+              .frame(width: geometry.size.width - 20, height: geometry.size.height - 10)
+              .position(.init(x: 10 + ((geometry.size.width - 20) / 2), y: 5 + ((geometry.size.height - 10) / 2)))
             
         })
         

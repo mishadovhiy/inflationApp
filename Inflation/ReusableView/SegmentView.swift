@@ -11,7 +11,8 @@ import SwiftUI
 struct SegmentView: View {
     var values:[String]
     var didSelect:(_ at:Int)->()
-    @State var selectedAt:Int
+    let selectedHolder:Int
+    @State var selectedAt:Int = 0
     private let height:CGFloat = 40
     var styles:SegmentStyle = .init()
     
@@ -40,6 +41,10 @@ struct SegmentView: View {
             
             
         })
+        .onAppear(perform: {
+            selectedAt = selectedHolder
+            print(selectedAt, " fsefwwf")
+        })
     }
     
     
@@ -57,7 +62,7 @@ struct SegmentView: View {
 
 #Preview {
     SegmentView(values: ["one", "two"], didSelect: {_ in
-    }, selectedAt: 0)
+    }, selectedHolder: 0)
 }
 
 

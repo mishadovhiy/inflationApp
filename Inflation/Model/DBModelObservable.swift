@@ -27,6 +27,7 @@ struct DBModelObservable {
 
        init() {
            self.dataBase = .init(dict: [:])
+           print("dbinit")
        }
 
     
@@ -41,10 +42,10 @@ struct DBModelObservable {
 
     private mutating func performLoad(completion:(()->())? = nil) {
         let db = UserDefaults.standard.value(forKey: dbKey) as? [String:Any] ?? [:]
-      //  DispatchQueue.main.async {
-            self.dataBase = .init(dict: db)
+        self.dataBase = .init(dict: db)
+        DispatchQueue.main.async {
             completion?()
-     //   }
+        }
     }
 }
 
