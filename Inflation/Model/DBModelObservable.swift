@@ -9,7 +9,7 @@ import Foundation
  
 
 struct DBModelObservable {
-    private let dbKey = "dataBaseee"
+    private let dbKey = "dataBaseeeeeeees"
     static func save(_ newValue:LocalDataBase) {
         var db = DBModelObservable.init()
         db.loadDB {
@@ -59,7 +59,7 @@ struct LocalDataBase {
     var cpi:[CPIData] {
         get {
             let db = dict["cpi"] as? [[String : Any]] ?? []
-            return db.compactMap({.init(dict: $0)}).sorted(by: {$0.year > $1.year})
+            return db.compactMap({.init(dict: $0)}).sorted(by: {Int($1.year) ?? 0 > Int($0.year) ?? 0})
         }
         set {
             dict.updateValue(newValue.compactMap({$0.dict}), forKey: "cpi")
@@ -80,7 +80,7 @@ struct LocalDataBase {
 
     var selectedYearFrom:String {
         get {
-            return selectedYear[.from] ?? ""
+            return selectedYear[.from] ?? "\(cpi.first?.year ?? "")"
         }
         set {
             selectedYear.updateValue(newValue, forKey: .from)
@@ -89,7 +89,7 @@ struct LocalDataBase {
     
     var selectedYearTwo:String {
         get {
-            return selectedYear[.to] ?? ""
+            return selectedYear[.to] ?? "\(cpi.last?.year ?? "")"
         }
         set {
             selectedYear.updateValue(newValue, forKey: .to)

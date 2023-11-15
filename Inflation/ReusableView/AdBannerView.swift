@@ -25,6 +25,6 @@ struct GADBannerViewController: UIViewControllerRepresentable {
         view.load(GADRequest())
         return viewController
     }
-
+    
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }

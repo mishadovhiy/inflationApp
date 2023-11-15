@@ -10,12 +10,24 @@ import SwiftUI
 
 struct TextModifier: ViewModifier {
     enum TextStyle {
-        case primary, secondary
+        case primary, secondary, link
+        var color:Color {
+            switch self {
+            case .primary:
+                return .primaryText
+            case .secondary:
+                return .secondaryText
+            case .link:
+                return .tint
+            }
+        }
     }
     var style:TextStyle
+    var font:Font?
     func body(content: Content) -> some View {
         content
-            .foregroundColor(.primaryText)
+            .foregroundColor(style.color)
+            .font(font ?? .system(size: 15, weight: .regular))
     }
 }
 
@@ -37,6 +49,10 @@ extension Text {
     
     var secondaryStyle: some View {
         return self.modifier(TextModifier(style: .secondary))
+    }
+    
+    func style(_ style:TextModifier) -> some View {
+        return self.modifier(style)
     }
 
 }
@@ -69,7 +85,11 @@ extension Color {
     }
     
     static var secondaryText:Color {
-        return .gray
+        return .init("gray2")
+    }
+    
+    static var tint:Color {
+        return .blue
     }
 }
 

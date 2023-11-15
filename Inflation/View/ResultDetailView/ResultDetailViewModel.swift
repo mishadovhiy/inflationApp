@@ -32,7 +32,7 @@ extension ResultDetailView {
                 .init(title: "Cumulative price change", description: priceChangePrecent.string),
                 .init(title: "CPI in \(result.from)", description: cpi1.string),
                 .init(title: "CPI in \(result.to)", description: cpi2.string),
-                .init(title: "Amount", description: result.enteredAmount + "."),
+                .init(title: "Amount", description: result.enteredAmount),
                 .init(title: "Converted amount", description: result.calculatedResult.string),
                 .init(title: "Price difference", description: priceChange(result).string)
             ]
@@ -57,21 +57,18 @@ extension ResultDetailView {
         }
         
         private mutating func loadHistory() {
-//            historyData = [
-//                .init(year: "w", value: "e", progress: 0.8)
-//            ]
             var resultData:[ResultDetailView.HistoryData] = []
-            let dollar = Int(cpiResult.enteredAmount)!
-            var year = Int(cpiResult.from)!
-         //   self.historyTitleLabel.text = "Inflation history of $\(dollar) between \(Globals.firstYear) and \(Globals.secondYear)"
+            let dollar = Int(cpiResult.enteredAmount) ?? 0
+            let fromY = Int(cpiResult.from) ?? 0
+            var year = fromY
             
-            if Int(cpiResult.to)! > Int(cpiResult.from)! {
+            if Int(cpiResult.to) ?? 0 > fromY {
                 for _ in 0...calculationOfYears-1 {
                     year += 1
                     resultData.append(historyCalculation(year: year, dollar: dollar))
                 }
             }
-            if Int(cpiResult.to)! < Int(cpiResult.from)! {
+            if Int(cpiResult.to)! < fromY {
                 for _ in 0...calculationOfYears-1 {
                     year -= 1
                     resultData.append(historyCalculation(year: year, dollar: dollar))
@@ -84,11 +81,10 @@ extension ResultDetailView {
         
         private mutating func historyCalculation(year: Int, dollar: Int) -> ResultDetailView.HistoryData {
             let cpi1 = cpiResult.cpis.first(where: {$0.year == "\(year)"})?.cpi ?? 0
-            let sum = (cpi2 / cpi1) * Double(dollar)
-            let convertedSum = round(100 * Double(sum)) / 100
-        //    let new = HistoryCell(year: "\(year)", value: "\(convertedSum)", count: n)
-            valuesAccrossYears.append(convertedSum)
-            return .init(year: "\(year)", value: "\(convertedSum)", progress: 0)
+
+            let value = HomeView.CalculatorViewModel.calculateInflation(firstCPI: self.cpi1, secondCPI: cpi1, enteredValue: cpiResult.enteredAmount)
+            valuesAccrossYears.append(value)
+            return .init(year: "\(year)", value: (value).string, progress: 0)
             
         }
         
@@ -113,7 +109,7 @@ extension ResultDetailView {
     }
     
     
-
+    
 }
 
 extension ResultDetailView {
@@ -136,11 +132,11 @@ extension ResultDetailView {
         }
         
         public static func with(
-          _ populator: (inout Self) throws -> ()
+            _ populator: (inout Self) throws -> ()
         ) rethrows -> Self {
-          var message = Self()
-          try populator(&message)
-          return message
+            var message = Self()
+            try populator(&message)
+            return message
         }
     }
     
@@ -151,7 +147,7 @@ extension ResultDetailView {
         let progress:CGFloat
     }
     
-
     
-
+    
+    
 }

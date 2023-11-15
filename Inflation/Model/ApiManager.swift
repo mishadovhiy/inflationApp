@@ -103,7 +103,7 @@ struct Api {
                         $0.cpi = loaded.value
                         $0.year = loaded.key
                     })
-                }), "")
+                }).sorted(by: {(Int($1.year) ?? 0) > (Int($0.year) ?? 0)}), "")
             })
         }
     }

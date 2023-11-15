@@ -14,7 +14,7 @@ extension HomeView {
         var higlightActionButtonAt:ActionButton? = nil
         var showingDetail:Bool = false
         var result:Double = 0
-
+        
         var calculationResultShowing:Bool = false
         var inflationResult:Double = 0
         var inflationTextHolder:String = ""
@@ -22,10 +22,16 @@ extension HomeView {
         var resultEnubled:Bool {
             result != 0
         }
-        mutating func calculateInflation(firstCPI: Double, secondCPI: Double) {
-            let amount = Double(textFiledValue) ?? 0
+        
+        static func calculateInflation(firstCPI: Double, secondCPI: Double, enteredValue:String) -> Double {
+            let amount = Double(enteredValue) ?? 0
             let sum = (secondCPI / firstCPI) * amount
-            result = round(100 * Double(sum)) / 100
+            return round(100 * Double(sum)) / 100
+        }
+        
+        mutating func calculateInflation(firstCPI: Double, secondCPI: Double) {
+            
+            result = HomeView.CalculatorViewModel.calculateInflation(firstCPI: firstCPI, secondCPI: secondCPI, enteredValue: textFiledValue)
             inflationResult = result
         }
         
@@ -42,6 +48,8 @@ extension HomeView {
                 result = calculatorFirstValue + (Double(textFiledValue) ?? 0)
             default: return
             }
+            calculatorFirstValue = 0
+            higlightActionButtonAt = nil
             calculationResultShowing = true
         }
         

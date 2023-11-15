@@ -12,46 +12,37 @@ struct HomeView:View {
     @State var model:CalculatorViewModel = .init()
     @State var db:DBModelObservable = .init()
     let sound:SoundModel = .init()
-    
+
+    @State private var key = ""
+
     var body: some View {
         GeometryReader { geometry in
             Color.black
                 .ignoresSafeArea(.all)
-            VStack(alignment:.center) {
-                segmentedView
-                VStack {
-                    if db.dataBase.selectedSegment == .inflation {
-                        pickersView()
-                    }
-                    Spacer()
-                    VStack {
-                        if db.dataBase.selectedSegment == .inflation {
-                            Text("result \(model.result.string)")
-                                .primaryStyle
-                        }
-                        Text(model.textFiledValue)
-                            .primaryStyle
-                    }
-                    Spacer()
-                    calculatorPadView(screen: geometry.size.width)
-                        .frame(width: geometry.size.width)
-                    HStack(alignment:.center) {
-                        GADBannerViewController()
-                    }
-                    .frame(width: GADBannerViewController.size.width, height: GADBannerViewController.size.height)
-                    
+                .frame(height: 0)
+            if isSmallDevice(geometry.size) {
+                HStack(spacing:0) {
+                    topView(geometry.size, smallDevice: true)
+                    bottomView(geometry.size, smallDevice: true)
                 }
+                
+            } else {
+                VStack(alignment:.center) {
+                    topView(geometry.size, smallDevice: false)
+                    bottomView(geometry.size, smallDevice: false)
+                }
+                .padding(.top, 5)
+                .frame(alignment:.trailing)
+                .background(Color.primaryBackground)
             }
-            .padding(.top, 5)
-            .frame(alignment:.trailing)
-            .background(Color.primaryBackground)
-            
         }
-        .background(Color.primaryBackground)
         .onAppear(perform: {
             DispatchQueue(label: "db", qos: .userInitiated).async {
                 self.db.loadDB {
                     Api().loadCPI { cpi, error in
+                        print("rwsw ", cpi.first?.year)
+                        print("sdf ", cpi.last?.year)
+
                         if error == "" {
                             self.db.dataBase.cpi = cpi
                         }
@@ -59,37 +50,67 @@ struct HomeView:View {
                 }
             }
         })
-
+        .sheet(isPresented: $model.showingDetail, content: {
+            ResultDetailView(result: .init(calculatedResult: model.result, from: db.dataBase.selectedYearFrom, to: db.dataBase.selectedYearTwo, cpis: db.dataBase.cpi, enteredAmount: model.textFiledValue))
+        })
+        
     }
-
     
-    func cpi(_ key:LocalDataBase.PickerSelections) -> Double {
-        return model.cpi(db.dataBase.selectedYear[key] ?? "", db: db.dataBase.cpi)
-    }
+    private func topView(_ screenWidth:CGSize, smallDevice:Bool) -> some View {
+        VStack {
+            segmentedView
+            if db.dataBase.selectedSegment == .inflation {
+                pickersView(smallDevice: smallDevice, screenWidth: screenWidth.width)
+            }
+            Spacer()
+           
+            VStack(alignment:.leading) {
+                if db.dataBase.selectedSegment == .inflation {
+                    Text(model.result.string)
+                        .secondaryStyle
+                }
+                Text(model.textFiledValue)
+                    .style(.init(style: .primary, font:.system(size: 25)))
+            }
+            .frame(width:smallDevice ? (screenWidth.width / 2) : screenWidth.width, alignment: .leading)
+            .background(Color.primaryBackground)
+            .padding(.leading,10)
+            .gesture( DragGesture()
+                .onEnded({ value in
+                    if value.predictedEndTranslation.width < 100 {
+                        removePressed(lastOnly: true)
+                    }
+                })
+            )
+            Spacer()
+        }
 
+    }
+    
+    
+    private func bottomView(_ screenWidth:CGSize, smallDevice:Bool) -> some View {
+        return VStack {
+            calculatorPadView(screen: screenWidth.width, smallDevice: smallDevice)
+                .frame(width: smallDevice ? (screenWidth.width / 2) : screenWidth.width)
+            HStack(alignment:.center) {
+                GADBannerViewController()
+            }
+            .frame(width: GADBannerViewController.size.width, height: GADBannerViewController.size.height)
+        }
+    }
+    
     
     var segmentedView:some View {
         SegmentView(values: ["Inflation", "Calculator"], didSelect: {
-            db.dataBase.selectedSegment = .init(rawValue: $0) ?? .inflation
+            self.segmentedChanged($0)
         }, selectedAt: db.dataBase.selectedSegment.rawValue)
         .frame(height: 40)
         .padding(.leading, 20)
         .padding(.trailing, 20)
-       /* Button {
-            withAnimation(.easeInOut) {
-                self.db.dataBase.selectedSegment = self.db.dataBase.selectedSegment == .inflation ? .calculator : .inflation
-                self.model.result = self.db.dataBase.selectedSegment == .inflation ? self.model.inflationResult : 0
-                self.model.textFiledValue = self.db.dataBase.selectedSegment == .inflation ? self.model.inflationTextHolder : ""
-            }
-        } label: {
-            Text("segmented view \(db.dataBase.selectedSegment.rawValue)")
-                .primaryStyle
-        }*/
-       // .tint(.black)
-
+        
     }
     
-    func pickersView() -> some View {
+    func pickersView(smallDevice:Bool, screenWidth:CGFloat) -> some View {
         return HStack {
             Picker("",selection: $db.dataBase.selectedYearFrom) {
                 ForEach(db.dataBase.cpi.sorted(by: {$0.year < $1.year})) { cpi in
@@ -104,14 +125,13 @@ struct HomeView:View {
                     Text(cpi.year)
                         .primaryStyle
                         .tag(cpi.year)
-                        
+                    
                 }
                 
             }
             .pickerStyle(.wheel)
         }
-        .frame(height: 240)
-        
+        .frame(width:smallDevice ? screenWidth / 2 : screenWidth, height: smallDevice ? 150 : 240)
         .onReceive(Just(db.dataBase.selectedYearTwo), perform: { _ in
             model.calculateInflation(firstCPI: cpi(.from), secondCPI: cpi(.to))
         })
@@ -121,58 +141,65 @@ struct HomeView:View {
         })
     }
     
-    func calculatorPadView(screen width:CGFloat) -> some View {
-         return VStack(alignment: .leading, content: {
-             if db.dataBase.selectedSegment == .calculator {
-                 HStack {
-                     calcButton("+", isSmall: true, pressed: {
-                         numberActionPressed(.plus)
-                     }, screen: width)
-                     calcButton("-", isSmall: true, pressed: {
-                         numberActionPressed(.minus)
-                     }, screen: width)
-                     calcButton("/", isSmall: true, pressed: {
-                         numberActionPressed(.divide)
-                     }, screen: width)
-                     calcButton("*", isSmall: true, pressed: {
-                         numberActionPressed(.multiply)
-                     }, screen: width)
-                 }
-                 Spacer()
-                     .frame(height: 10)
-             }
-             HStack(alignment: .top, content: {
-                 numberPadView(screen: width)
-                 VStack(spacing:10, content: {
-                     calcButton("<", pressed: {
-                         removePressed(lastOnly: true)
-                     }, screen: width)
-                     calcButton("C", pressed: {
-                         removePressed()
-                     }, screen: width)
-                     
-                     switch db.dataBase.selectedSegment {
-                    case .inflation:
-                         if model.resultEnubled {
-                             calcButton("</", pressed: {
-                                 model.showingDetail.toggle()
-                             }, screen: width)
-                             .sheet(isPresented: $model.showingDetail, content: {
-                                 ResultDetailView(result: .init(calculatedResult: model.result, from: db.dataBase.selectedYearFrom, to: db.dataBase.selectedYearTwo, cpis: db.dataBase.cpi, enteredAmount: model.textFiledValue))
-                             })
-                         }
-                         
-                    case .calculator:
-                      //  Spacer()
-                        //    .frame(height: 55)
-                        calcButton("=", pressed: {
-                            numberActionPressed(.result)
-                        }, screen: width)
-                        
-                    }
- 
+    private func calculatorActionsView(smallDevice:Bool, resWidth:CGFloat) -> some View {
+        let actions:[(String, CalculatorViewModel.ActionButton)] = [
+            ("+", .plus),
+            ("－", .minus),
+            ("÷", .divide),
+            ("×", .multiply)
+        ]
+        return HStack {
+            ForEach(0..<actions.count, id:\.self) { i in
+                calcButton(actions[i].0, isSelectedAction:model.higlightActionButtonAt == actions[i].1, isSmall: true, pressed: {
+                    numberActionPressed(actions[i].1)
+                }, screen: resWidth, style: .secondary)
+            }
+            
+        }
+    }
+    
+    private func inflationActionsView(resWidth:CGFloat, smallDevice:Bool) -> some View {
+        VStack(spacing:10, content: {
+            calcButton("⌫", pressed: {
+                removePressed(lastOnly: true)
+            }, screen: resWidth, style: .secondary)
+            calcButton("C", pressed: {
+                removePressed()
+            }, screen: resWidth, style: .secondary)
+            
+            switch db.dataBase.selectedSegment {
+            case .inflation:
+                if model.resultEnubled {
+                    calcButton("⎋", pressed: {
+                        model.showingDetail.toggle()
+                    }, screen: resWidth, style:.secondary)
                     
-                })
+                }
+                
+            case .calculator:
+                //  Spacer()
+                //    .frame(height: 55)
+                calcButton("=", pressed: {
+                    numberActionPressed(.result)
+                }, screen: resWidth, style: .secondary)
+                
+            }
+            
+            
+        })
+    }
+    
+    private func calculatorPadView(screen width:CGFloat, smallDevice:Bool) -> some View {
+        let resWidth = smallDevice ? width / 2 : width
+        return VStack(alignment: .leading, content: {
+            if db.dataBase.selectedSegment == .calculator {
+                calculatorActionsView(smallDevice: smallDevice, resWidth: resWidth)
+                Spacer()
+                    .frame(height: 10)
+            }
+            HStack(alignment: .top, content: {
+                numberPadView(screen: resWidth)
+                inflationActionsView(resWidth: resWidth, smallDevice: smallDevice)
             })
             
         })
@@ -191,14 +218,22 @@ struct HomeView:View {
                 if db.dataBase.selectedSegment == .calculator {
                     calcButton(",", pressed: {
                         self.toDecimalPressed()
-                    }, screen: width)
+                    }, screen: width, style:.secondary)
                 }
                 calcButton(number: 0, screen: width)
-
+                
             }
         })
         
     }
+    
+    
+    func cpi(_ key:LocalDataBase.PickerSelections) -> Double {
+        let cpis = db.dataBase.cpi
+        let defaultYear = key == .from ? (cpis.first?.year ?? "") : (cpis.last?.year ?? "")
+        return model.cpi(db.dataBase.selectedYear[key] ?? defaultYear, db: cpis)
+    }
+    
     
     func toDecimalPressed() {
         if !model.textFiledValue.contains(".") {
@@ -206,25 +241,21 @@ struct HomeView:View {
         }
     }
     
-    func calcButton(_ text:String? = nil, number:Int? = nil, isSmall:Bool = false, pressed:(()->())? = nil, screen width:CGFloat) -> some View {
-        Button(action: {
+    func calcButton(_ text:String? = nil, number:Int? = nil, isSelectedAction:Bool = false, isSmall:Bool = false, pressed:(()->())? = nil, screen width:CGFloat, style:TextModifier.TextStyle = .primary) -> some View {
+        CalculatorViewButton(title: text ?? "\(number ?? 0)", style: style, isSelectedAction:isSelectedAction, pressed: {
             if let pressed = pressed {
                 pressed()
             } else {
                 numberPressed(number ?? 0)
             }
-        }) {
-            Text(text ?? "\(number ?? 0)")
-                .primaryStyle
-                .frame(width: width / 4, height: 60)
-        }
+        })
         .frame(width: width / 4, height: 60)
     }
     
     
     
     func numberPressed(_ number:Int) {
-   //     model.higlightActionButtonAt = nil
+        //     model.higlightActionButtonAt = nil
         print(number)
         if model.calculationResultShowing {
             model.textFiledValue = ""
@@ -244,17 +275,6 @@ struct HomeView:View {
     }
 
     
-  /*  func tfChanged(oldValue:String, newValue:String) {
-        if Double(self.model.textFiledValue) == nil && self.model.textFiledValue != "" {
-            model.textFiledValue = oldValue
-        } else {
-            if db.dataBase.selectedSegment == .inflation {
-                model.calculateInflation(firstCPI: cpi(.from), secondCPI: cpi(.to))
-                self.model.inflationTextHolder = self.model.textFiledValue
-            }
-        }
-    }*/
-    
     func numberActionPressed(_ action:CalculatorViewModel.ActionButton) {
         if action != .result {
             model.higlightActionButtonAt = action
@@ -267,7 +287,7 @@ struct HomeView:View {
         }
         sound.play(.erase)
     }
-
+    
     func removePressed(lastOnly:Bool = false) {
         let last = model.calculationResultShowing ? false : lastOnly
         if model.calculationResultShowing {
@@ -280,8 +300,28 @@ struct HomeView:View {
             }
         } else {
             model.textFiledValue = ""
+            model.calculatorFirstValue = 0
+            model.higlightActionButtonAt = nil
         }
         sound.play(last ? .erase : .eraseAll)
+        if db.dataBase.selectedSegment == .inflation {
+            model.inflationTextHolder = model.textFiledValue
+        }
+    }
+    
+    
+    private func segmentedChanged(_ new:Int) {
+        withAnimation(.easeInOut) {
+            self.db.dataBase.selectedSegment = .init(rawValue: new) ?? .inflation
+            self.model.result = self.db.dataBase.selectedSegment == .inflation ? self.model.inflationResult : 0
+            self.model.textFiledValue = self.db.dataBase.selectedSegment == .inflation ? self.model.inflationTextHolder : ""
+        }
+    }
+    
+    private func isSmallDevice(_ screenSize:CGSize) ->  Bool {
+        print(screenSize, " screenSize")
+        let isSmall = screenSize.width > screenSize.height && screenSize.height <= 500
+        return isSmall
     }
 }
 

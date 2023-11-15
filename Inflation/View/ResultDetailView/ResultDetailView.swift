@@ -22,12 +22,12 @@ struct ResultDetailView: View {
                         .frame(height: 10)
                     Text("Result")
                         .primaryStyle
-                        .frame(width: geo.size.width,
+                        .frame(width: geo.size.width - 20,
                                alignment: .center)
                         .padding(.trailing, 10)
                     
                     ForEach(model.resultTableData) {
-                        resultTableCell($0, screen: geo.size.width)
+                        resultTableCell($0, screen: geo.size.width - 20)
                     }
                     Spacer()
                         .frame(height: 30)
@@ -35,17 +35,21 @@ struct ResultDetailView: View {
                         Text("How to Calculate Inflation")
                             .primaryStyle
                         Text("To get the total inflation rate we use the following formula:")
-                            .primaryStyle
+                            .secondaryStyle
+                        formulaView
+                        formulaDescriptionView
                     }
                     Spacer()
                         .frame(height: 30)
-                    Text("History title")
+                    Text("History")
                         .primaryStyle
                     ForEach(model.historyData) {
+                        Spacer()
+                            .frame(height: 15)
                         historyCell($0)
                     }
                 }
-                .frame(width:geo.size.width, 
+                .frame(width:geo.size.width - 20, 
                        alignment: .leading)
                 .padding(.leading, 10)
                 .padding(.trailing, 10)
@@ -74,16 +78,26 @@ struct ResultDetailView: View {
         return VStack {
             HStack {
                 Text(data.year)
-                    .primaryStyle
+                    .secondaryStyle
                 Spacer()
                 Text(data.value)
                     .primaryStyle
             }
             ProgressView(value: model.progressBarSetup(n: data.value))
+                
         }
-        .padding(.trailing, 10)
     }
     
+    
+    var formulaView:some View {
+        Text("(\(model.cpi2.string) ÷ \(model.cpi1.string)) ✕ $\(result.enteredAmount) = $\(result.calculatedResult.string)")
+            .primaryStyle
+    }
+    
+    var formulaDescriptionView:some View {
+        Text("(\(result.to) CPI ÷ \(result.from) CPI) ✕ Dollar Amount")
+            .secondaryStyle
+    }
 }
 
 #Preview {

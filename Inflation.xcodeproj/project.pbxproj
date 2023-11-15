@@ -23,6 +23,8 @@
 		8DD0E2222B02F819004FC1E3 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD0E2212B02F819004FC1E3 /* CALayer.swift */; };
 		8DD0E2242B02F824004FC1E3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD0E2232B02F824004FC1E3 /* UIColor.swift */; };
 		8DD0E2262B02FACE004FC1E3 /* Double+Int+Float.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD0E2252B02FACE004FC1E3 /* Double+Int+Float.swift */; };
+		8DF17DFB2B04418E00341EEC /* CalculatorViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF17DFA2B04418E00341EEC /* CalculatorViewButton.swift */; };
+		8DF17DFD2B044E1100341EEC /* KeyPressDetectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF17DFC2B044E1100341EEC /* KeyPressDetectorView.swift */; };
 		8DF3BF462AFE072D0078FA8F /* InflationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF3BF452AFE072D0078FA8F /* InflationApp.swift */; };
 		8DF3BF492AFE0E190078FA8F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF3BF482AFE0E190078FA8F /* HomeView.swift */; };
 		8DF3BF4F2AFE0E590078FA8F /* RegularTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF3BF4D2AFE0E590078FA8F /* RegularTableData.swift */; };
@@ -49,6 +51,8 @@
 		8DD0E2212B02F819004FC1E3 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		8DD0E2232B02F824004FC1E3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		8DD0E2252B02FACE004FC1E3 /* Double+Int+Float.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Int+Float.swift"; sourceTree = "<group>"; };
+		8DF17DFA2B04418E00341EEC /* CalculatorViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewButton.swift; sourceTree = "<group>"; };
+		8DF17DFC2B044E1100341EEC /* KeyPressDetectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPressDetectorView.swift; sourceTree = "<group>"; };
 		8DF3BF452AFE072D0078FA8F /* InflationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InflationApp.swift; sourceTree = "<group>"; };
 		8DF3BF482AFE0E190078FA8F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8DF3BF4D2AFE0E590078FA8F /* RegularTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularTableData.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				8D50DFB12B03D5DE00740487 /* AdBannerView.swift */,
+				8DF17DFC2B044E1100341EEC /* KeyPressDetectorView.swift */,
+				8DF17DFA2B04418E00341EEC /* CalculatorViewButton.swift */,
 				8D50DFB62B03E9B100740487 /* SegmentView.swift */,
 			);
 			path = ReusableView;
@@ -139,11 +145,11 @@
 		8DD0E21E2B02F7EC004FC1E3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8D91FDC72B01B90E0042A147 /* extensionsSwiftui.swift */,
 				8D7BF74A2AB66134005F0CB9 /* Extensions.swift */,
 				8DD0E2252B02FACE004FC1E3 /* Double+Int+Float.swift */,
 				8DD0E2232B02F824004FC1E3 /* UIColor.swift */,
 				8DD0E2212B02F819004FC1E3 /* CALayer.swift */,
-				8D91FDC72B01B90E0042A147 /* extensionsSwiftui.swift */,
 				8DD0E21F2B02F80F004FC1E3 /* UIView.swift */,
 			);
 			path = Extensions;
@@ -256,6 +262,7 @@
 				8DA2B8062AFEC3CE00847B43 /* CalculatorViewModel.swift in Sources */,
 				8D50DFB22B03D5DE00740487 /* AdBannerView.swift in Sources */,
 				8DD0E2222B02F819004FC1E3 /* CALayer.swift in Sources */,
+				8DF17DFB2B04418E00341EEC /* CalculatorViewButton.swift in Sources */,
 				8DA2B8042AFEC36800847B43 /* ResultDetailViewModel.swift in Sources */,
 				8D7BF7472AB650EE005F0CB9 /* ApiManager.swift in Sources */,
 				8D50DFB52B03E38600740487 /* SoundModel.swift in Sources */,
@@ -268,6 +275,7 @@
 				8DF3BF492AFE0E190078FA8F /* HomeView.swift in Sources */,
 				8D91FDC82B01B90E0042A147 /* extensionsSwiftui.swift in Sources */,
 				8DD0E2262B02FACE004FC1E3 /* Double+Int+Float.swift in Sources */,
+				8DF17DFD2B044E1100341EEC /* KeyPressDetectorView.swift in Sources */,
 				8DD0E2202B02F810004FC1E3 /* UIView.swift in Sources */,
 				8DF3BF462AFE072D0078FA8F /* InflationApp.swift in Sources */,
 				8DF3BF532AFE0EC20078FA8F /* ResultDetailView.swift in Sources */,
@@ -408,7 +416,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Inflation/Inflation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				INFOPLIST_FILE = Inflation/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
@@ -417,7 +425,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = Dovhiy.Misha.inflation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,7 +442,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Inflation/Inflation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FQA2XH9ZUM;
 				INFOPLIST_FILE = Inflation/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
@@ -443,7 +451,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3;
+				MARKETING_VERSION = 4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = Dovhiy.Misha.inflation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
