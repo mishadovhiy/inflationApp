@@ -37,6 +37,7 @@ struct HomeView:View {
             }
         }
         .onAppear(perform: {
+
             DispatchQueue(label: "db", qos: .userInitiated).async {
                 self.db.loadDB {
                     print(db.dataBase.selectedSegment.rawValue, " grgswfr")
@@ -94,10 +95,10 @@ struct HomeView:View {
         return VStack {
             calculatorPadView(screen: screenWidth.width, smallDevice: smallDevice)
                 .frame(width: smallDevice ? (screenWidth.width / 2) : screenWidth.width)
-            HStack(alignment:.center) {
-                GADBannerViewController()
-            }
-            .frame(width: GADBannerViewController.size.width, height: GADBannerViewController.size.height)
+//            HStack(alignment:.center) {
+//                GADBannerViewController()
+//            }
+//            .frame(width: GADBannerViewController.size.width, height: GADBannerViewController.size.height)
         }
     }
     
@@ -329,4 +330,27 @@ struct HomeView:View {
 
 #Preview {
     HomeView()
+}
+
+
+struct uikitView:UIViewRepresentable {
+    var text:String
+    func updateUIView(_ uiView: UIView, context: Context) {
+        guard let label = uiView.subviews.first(where: {$0 is UILabel}) as? UILabel else { return }
+        label.text = "\(text) updateUIView"
+        print(#function, " tgrfed")
+    }
+    
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.backgroundColor = .red
+        let label = UILabel()
+        label.text = "sdaasd"
+        view.addSubview(label)
+        label.addConstaits([.left:0, .right:0, .top:0, .bottom:0], superV: view)
+        print(#function, " egrfwd")
+
+        return view
+    }
+
 }
